@@ -25,7 +25,7 @@ public class DirtController : MonoBehaviour
         hpCanvas = GameObject.FindGameObjectWithTag("HPCanvas").GetComponent<CanvasGroup>();
     }
 
-    private void OnMouseDown()
+    public void onMouseClick()
     {
         selected = this;
         sprender.sprite = selectedSprite;

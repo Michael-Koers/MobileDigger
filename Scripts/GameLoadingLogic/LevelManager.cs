@@ -20,14 +20,14 @@ public class LevelManager : MonoBehaviour
     }
 
     public int square = 4;
-
+    public int level = 1;
     public GameObject exit;
     public GameObject[] dirtTiles;
 
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
 
-    void InitialiseList()
+    void InitialiseGridList()
     {
         gridPositions.Clear();
 
@@ -42,7 +42,7 @@ public class LevelManager : MonoBehaviour
 
     void BoardSetup()
     {
-        boardHolder = new GameObject("Board").transform;
+        boardHolder = new GameObject("Level" + level).transform;
 
         for (int x = 0; x < square; x++)
         {
@@ -76,11 +76,28 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void SetupScene(int level)
+    void PlaceExit()
+    {
+        GameObject exitObject = Instantiate(exit, RandomPosition(), Quaternion.identity);
+        exitObject.transform.SetParent(boardHolder);
+    }
+
+    public void SetupScene()
     {
         BoardSetup();
-        InitialiseList();
-        Instantiate(exit, new Vector3(Random.Range(0, square), Random.Range(0, square)), Quaternion.identity);
+        InitialiseGridList();
+        PlaceExit();
+    }
 
+    private void ClearScene()
+    {
+        Destroy(boardHolder.gameObject);
+    }
+
+    public void NextLevel()
+    {
+        ClearScene();
+        level++;
+        SetupScene();
     }
 }
