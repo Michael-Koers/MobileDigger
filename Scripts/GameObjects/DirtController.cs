@@ -6,11 +6,11 @@ public class DirtController : MonoBehaviour
 {
 
     public static DirtController selected;
-    public float healthPoints = 5;
     public int damage = 1;
 
     private CanvasGroup hpCanvas;
-    [HideInInspector] public float currentHP;
+
+    [HideInInspector] public float healthPoints, currentHP = LevelManager.level;
 
     [SerializeField] private Sprite selectedSprite;
     private Sprite defaultSprite;
@@ -19,9 +19,9 @@ public class DirtController : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("HP: " + healthPoints);
         sprender = GetComponent<SpriteRenderer>();
         defaultSprite = sprender.sprite;
-        currentHP = healthPoints;
         hpCanvas = GameObject.FindGameObjectWithTag("HPCanvas").GetComponent<CanvasGroup>();
     }
 

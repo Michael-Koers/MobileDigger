@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
 {
-
     [Serializable]
     public class Count
     {
@@ -19,13 +19,28 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    //Variables for current level and size of board
     public int square = 4;
-    public int level = 1;
+    public static int level = 1;
+
+    //Tiles to be placed on the board
     public GameObject exit;
     public GameObject[] dirtTiles;
 
+    //UI Text displaying current level
+    private GameObject currentLevel;
+
+    //Objects on the board
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
+
+    //Collection of all the levels by level number
+    private Dictionary<int, Transform> levels = new Dictionary<int, Transform>();
+
+    private void Awake()
+    {
+        currentLevel = GameObject.FindGameObjectWithTag("CurrentLevelText").gameObject;
+    }
 
     void InitialiseGridList()
     {
@@ -84,18 +99,36 @@ public class LevelManager : MonoBehaviour
 
     public void SetupScene()
     {
+        Debug.Log("Setting up new scene ");
         BoardSetup();
         InitialiseGridList();
         PlaceExit();
+        UpdateLevelCanvas();
+        SaveLevel();
+    }
+
+    private void UpdateLevelCanvas()
+    {
+        Debug.Log("Updating current level text ");
+        currentLevel.GetComponent<Text>().text = "Level : " + level;
+    }
+
+    private void SaveLevel()
+    {
+        Debug.Log("Saving level");
+        levels.Add(level, boardHolder);
+        Debug.Log("amount of levels saved: " + levels.Count);
     }
 
     private void ClearScene()
     {
+        Debug.Log("Clearing Scene");
         Destroy(boardHolder.gameObject);
     }
 
     public void NextLevel()
     {
+        Debug.Log("Going to next level .. ");
         ClearScene();
         level++;
         SetupScene();
