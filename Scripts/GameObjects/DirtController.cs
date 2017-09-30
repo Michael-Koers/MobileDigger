@@ -4,24 +4,35 @@ using UnityEngine;
 
 public class DirtController : MonoBehaviour
 {
-
+    //Selected dirt block
     public static DirtController selected;
-    public int damage = 1;
 
+    //Dig button canvasgroup
     private CanvasGroup hpCanvas;
 
-    [HideInInspector] public float healthPoints, currentHP = LevelManager.level;
+    //Total and current HP of dirt
+    [HideInInspector] public float healthPoints;
+    [HideInInspector] public float currentHP;
 
+    //Selected and default Sprite + sprite renderer
     [SerializeField] private Sprite selectedSprite;
     private Sprite defaultSprite;
     private SpriteRenderer sprender;
 
+    //Rewarded points for destroying dirt block
+    public int value;
 
     private void Awake()
     {
-        Debug.Log("HP: " + healthPoints);
+        //Get a sprite reference of this game object
         sprender = GetComponent<SpriteRenderer>();
         defaultSprite = sprender.sprite;
+
+        //Set HP values of the dirt block
+        currentHP = LevelManager.level;
+        healthPoints = LevelManager.level;
+
+        //Get reference to the Dig button canvas
         hpCanvas = GameObject.FindGameObjectWithTag("HPCanvas").GetComponent<CanvasGroup>();
     }
 
@@ -42,9 +53,10 @@ public class DirtController : MonoBehaviour
 
     public void DamageDirt()
     {
-        selected.currentHP -= selected.damage;
+        selected.currentHP -= Player.player.damage;
         if (selected.currentHP <= 0)
         {
+            Player.AddPoints(value);
             selected.HideDigButton();
             Destroy(selected.gameObject);
             selected = null;

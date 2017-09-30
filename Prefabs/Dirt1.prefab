@@ -109,10 +109,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f517a81f1d219b4fa0bdbeaf5df7ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 3
-  damage: 1
-  currentHP: 0
+  healthPoints: 1
+  currentHP: 1
   selectedSprite: {fileID: 21300000, guid: 96cc6e2271dff244cbcd311c0704e47a, type: 3}
+  value: 1
 --- !u!212 &212914672144792706
 SpriteRenderer:
   m_ObjectHideFlags: 1

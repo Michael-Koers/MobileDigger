@@ -94,12 +94,12 @@ public class LevelManager : MonoBehaviour
     void PlaceExit()
     {
         GameObject exitObject = Instantiate(exit, RandomPosition(), Quaternion.identity);
+        Debug.Log("exit placed @: " + exitObject.transform.position);
         exitObject.transform.SetParent(boardHolder);
     }
 
     public void SetupScene()
     {
-        Debug.Log("Setting up new scene ");
         BoardSetup();
         InitialiseGridList();
         PlaceExit();
@@ -109,26 +109,22 @@ public class LevelManager : MonoBehaviour
 
     private void UpdateLevelCanvas()
     {
-        Debug.Log("Updating current level text ");
-        currentLevel.GetComponent<Text>().text = "Level : " + level;
+        currentLevel.GetComponent<Text>().text = "Level " + level;
     }
 
     private void SaveLevel()
     {
-        Debug.Log("Saving level");
         levels.Add(level, boardHolder);
         Debug.Log("amount of levels saved: " + levels.Count);
     }
 
     private void ClearScene()
     {
-        Debug.Log("Clearing Scene");
         Destroy(boardHolder.gameObject);
     }
 
     public void NextLevel()
     {
-        Debug.Log("Going to next level .. ");
         ClearScene();
         level++;
         SetupScene();

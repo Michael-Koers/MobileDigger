@@ -15,6 +15,13 @@ public class ExitController : MonoBehaviour
     public void onMouseClick()
     {
         ShowNextLevelPanel();
+
+        //If a dirt block is selected, unselect it and hide dig button
+        if (DirtController.selected)
+        {
+            DirtController.selected.HideDigButton();
+            DirtController.selected = null;
+        }
     }
 
     private void ShowNextLevelPanel()

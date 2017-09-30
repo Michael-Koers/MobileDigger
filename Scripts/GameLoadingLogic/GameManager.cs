@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
     public LevelManager boardScript;
-    public int level = 0;
 
     void Awake()
     {
@@ -26,8 +25,6 @@ public class GameManager : MonoBehaviour
 
     void onLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        level++;
-
         InitGame();
     }
 
