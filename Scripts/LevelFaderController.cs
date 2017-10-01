@@ -5,23 +5,38 @@ using UnityEngine.UI;
 
 public class LevelFaderController : MonoBehaviour
 {
-
     private CanvasGroup canvas;
     private Text levelText;
-    public float fadeDuration;
+
+    public float fadeInDuration;
+    public float levelDisplayDuration;
+    public float fadeAwayDuration;
 
     private void Awake()
     {
-        Debug.Log("Doing something?");
         canvas = GetComponent<CanvasGroup>();
         levelText = GetComponentInChildren<Text>();
-        StartCoroutine(HideLevel());
+        levelText.text = "Level " + LevelManager.level;
+        StartCoroutine(InitialLevelDisplay());
+    }
+
+    public IEnumerator InitialLevelDisplay()
+    {
+        yield return PauseLevel();
+        yield return HideLevel();
     }
 
     public IEnumerator DisplayLevel()
     {
+        levelText.text = "Level " + LevelManager.level;
         yield return StartCoroutine(ShowLevel());
-        yield return StartCoroutine(HideLevel());       
+        yield return StartCoroutine(PauseLevel());
+        yield return StartCoroutine(HideLevel());
+    }
+
+    public IEnumerator PauseLevel()
+    {
+        yield return new WaitForSeconds(levelDisplayDuration);
     }
 
     public IEnumerator ShowLevel()
@@ -36,29 +51,27 @@ public class LevelFaderController : MonoBehaviour
         canvas.blocksRaycasts = false;
     }
 
-    IEnumerator FadeImage(bool fadeAway)
+    private IEnumerator FadeImage(bool fadeAway)
     {
-        levelText.text = "Level " + LevelManager.level;
-
         // fade from opaque to transparent
         if (fadeAway)
         {
-            // loop over 1 second backwards
-            for (float i = fadeDuration; i >= 0; i -= Time.deltaTime)
+            // loop over x second backwards
+            for (float i = fadeAwayDuration; i >= 0; i -= Time.deltaTime)
             {
                 // set color with i as alpha
-                canvas.alpha = i;
+                canvas.alpha = (i / fadeAwayDuration);
                 yield return null;
             }
         }
         // fade from transparent to opaque
         else
         {
-            // loop over 1 second
-            for (float i = 0; i <= fadeDuration; i += Time.deltaTime)
+            // loop over x second
+            for (float i = 0; i <= fadeInDuration; i += Time.deltaTime)
             {
                 // set color with i as alpha
-                canvas.alpha = i;
+                canvas.alpha = (i / fadeInDuration);
                 yield return null;
             }
         }

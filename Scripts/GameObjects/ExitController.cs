@@ -7,7 +7,7 @@ public class ExitController : MonoBehaviour
 
     [HideInInspector] public CanvasGroup nextLevelCanvas;
 
-    void Start()
+    private void Start()
     {
         nextLevelCanvas = GameObject.FindGameObjectWithTag("NextLevelCanvas").GetComponent<CanvasGroup>();
     }

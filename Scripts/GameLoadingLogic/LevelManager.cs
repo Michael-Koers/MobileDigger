@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,18 +21,23 @@ public class LevelManager : MonoBehaviour
     }
 
     //Variables for current level and size of board
-    public int square = 4;
-    public static int level = 1;
+    public int baseSquare = 4;  //Base size of field
+    public int levelGrowth = 5; // amount of levels before field grows
+    private int square; //Current size of field
+    public static int level = 1; // Current level
 
     //Tiles to be placed on the board
-    public GameObject exit;
-    public GameObject[] dirtTiles;
+    public GameObject exit; //Exit tile NOT object
+    public GameObject[] dirtTiles; //Array of dirt tiles NOT objects
+
+    //Controller of the level fading
+    public LevelFaderController levelFader;
 
     //UI Text displaying current level
     private GameObject currentLevel;
 
     //Objects on the board
-    private Transform boardHolder;
+    private Transform boardHolder; //Empty gameobject holding all objects
     private List<Vector3> gridPositions = new List<Vector3>();
 
     //Collection of all the levels by level number
@@ -39,23 +45,25 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
+        square = baseSquare;
         currentLevel = GameObject.FindGameObjectWithTag("CurrentLevelText").gameObject;
+        levelFader = GameObject.FindGameObjectWithTag("LevelCanvas").GetComponent<LevelFaderController>();
     }
 
-    void InitialiseGridList()
+    private void InitialiseGridList()
     {
         gridPositions.Clear();
 
-        for (int x = 1; x < square; x++)
+        for (int x = 0; x < square; x++)
         {
-            for (int y = 1; y < square; y++)
+            for (int y = 0; y < square; y++)
             {
                 gridPositions.Add(new Vector3(x, y, 0.0f));
             }
         }
     }
 
-    void BoardSetup()
+    private void BoardSetup()
     {
         boardHolder = new GameObject("Level" + level).transform;
 
@@ -72,15 +80,17 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    Vector3 RandomPosition()
+    private Vector3 RandomPosition()
     {
         int randomIndex = Random.Range(0, gridPositions.Count);
+
+        Debug.Log("Randomindex: " + randomIndex + ", grid count: " + gridPositions.Count);
         Vector3 randomPosition = gridPositions[randomIndex];
         gridPositions.RemoveAt(randomIndex);
         return randomPosition;
     }
 
-    void LayoutObjectAtRandom(GameObject[] tileArray, int minimum, int maximum)
+    private void LayoutObjectAtRandom(GameObject[] tileArray, int minimum, int maximum)
     {
         int objectCount = Random.Range(minimum, maximum + 1);
         for (int i = 0; i < objectCount; i++)
@@ -91,20 +101,27 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    void PlaceExit()
+    private void PlaceExit()
     {
         GameObject exitObject = Instantiate(exit, RandomPosition(), Quaternion.identity);
         Debug.Log("exit placed @: " + exitObject.transform.position);
         exitObject.transform.SetParent(boardHolder);
     }
 
-    public void SetupScene()
+    public void SetupLevel()
     {
+        IncreaseDirtFieldSize();
         BoardSetup();
         InitialiseGridList();
         PlaceExit();
         UpdateLevelCanvas();
         SaveLevel();
+    }
+
+    private void IncreaseDirtFieldSize()
+    {
+        //Increase the  size of the field every x levels
+        square = baseSquare + (int)Mathf.Floor(level / levelGrowth);
     }
 
     private void UpdateLevelCanvas()
@@ -118,15 +135,30 @@ public class LevelManager : MonoBehaviour
         Debug.Log("amount of levels saved: " + levels.Count);
     }
 
-    private void ClearScene()
+    private void ClearLevel()
     {
         Destroy(boardHolder.gameObject);
     }
 
-    public void NextLevel()
+    public IEnumerator NextLevel()
     {
-        ClearScene();
         level++;
-        SetupScene();
+        //Start showing the new level 
+        StartCoroutine(levelFader.DisplayLevel());
+
+        //Wait for the fade in so we change the level while everything is blacked out
+        yield return new WaitForSeconds(levelFader.fadeInDuration);
+
+        //Clear and setup new level, set camera back to normal
+        ClearLevel();
+
+        ResetCamera();
+
+        SetupLevel();
+    }
+
+    private void ResetCamera()
+    {
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<TouchCamera>().ResetCamera();
     }
 }
