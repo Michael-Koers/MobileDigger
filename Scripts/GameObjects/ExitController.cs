@@ -5,7 +5,7 @@ using UnityEngine;
 public class ExitController : MonoBehaviour
 {
 
-    private CanvasGroup nextLevelCanvas;
+    [HideInInspector] public CanvasGroup nextLevelCanvas;
 
     void Start()
     {
@@ -14,25 +14,13 @@ public class ExitController : MonoBehaviour
 
     public void onMouseClick()
     {
-        ShowNextLevelPanel();
+        CanvasManager.ShowCanvas(nextLevelCanvas);
 
         //If a dirt block is selected, unselect it and hide dig button
         if (DirtController.selected)
         {
-            DirtController.selected.HideDigButton();
+            CanvasManager.HideCanvas(DirtController.selected.hpCanvas);
             DirtController.selected = null;
         }
-    }
-
-    private void ShowNextLevelPanel()
-    {
-        nextLevelCanvas.alpha = 1f;
-        nextLevelCanvas.blocksRaycasts = true;
-    }
-
-    public void HideNextLevelPanel()
-    {
-        nextLevelCanvas.alpha = 0f;
-        nextLevelCanvas.blocksRaycasts = false;
     }
 }

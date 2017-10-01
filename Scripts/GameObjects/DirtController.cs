@@ -8,7 +8,7 @@ public class DirtController : MonoBehaviour
     public static DirtController selected;
 
     //Dig button canvasgroup
-    private CanvasGroup hpCanvas;
+    [HideInInspector] public CanvasGroup hpCanvas;
 
     //Total and current HP of dirt
     [HideInInspector] public float healthPoints;
@@ -40,7 +40,7 @@ public class DirtController : MonoBehaviour
     {
         selected = this;
         sprender.sprite = selectedSprite;
-        ShowDigButton();
+        CanvasManager.ShowCanvas(hpCanvas);
     }
 
     private void Update()
@@ -57,22 +57,10 @@ public class DirtController : MonoBehaviour
         if (selected.currentHP <= 0)
         {
             Player.AddPoints(value);
-            selected.HideDigButton();
+            CanvasManager.HideCanvas(selected.hpCanvas);
             Destroy(selected.gameObject);
             selected = null;
         }
 
-    }
-
-    public void ShowDigButton()
-    {
-        hpCanvas.alpha = 1f;
-        hpCanvas.blocksRaycasts = true;
-    }
-
-    public void HideDigButton()
-    {
-        hpCanvas.alpha = 0f;
-        hpCanvas.blocksRaycasts = false;
     }
 }

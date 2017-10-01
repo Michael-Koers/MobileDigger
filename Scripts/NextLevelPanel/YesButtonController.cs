@@ -9,6 +9,6 @@ public class YesButtonController : MonoBehaviour
     {
         Debug.Log("Continueing to next level!");
         GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>().NextLevel();
-        GameObject.FindGameObjectWithTag("Exit").GetComponent<ExitController>().HideNextLevelPanel();
+        CanvasManager.HideCanvas(GameObject.FindGameObjectWithTag("Exit").GetComponent<ExitController>().nextLevelCanvas);
     }
 }
