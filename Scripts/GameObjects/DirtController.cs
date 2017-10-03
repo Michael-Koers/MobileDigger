@@ -29,8 +29,9 @@ public class DirtController : MonoBehaviour
         defaultSprite = sprender.sprite;
 
         //Set HP values of the dirt block
-        currentHP = LevelManager.level;
-        healthPoints = LevelManager.level;
+        int level = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>().level;
+        currentHP = (level != 0) ? level : 1; //Because first level is level '0' 
+        healthPoints = currentHP;
 
         //Get reference to the Dig button canvas
         hpCanvas = GameObject.FindGameObjectWithTag("HPCanvas").GetComponent<CanvasGroup>();

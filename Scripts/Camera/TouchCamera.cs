@@ -1,6 +1,7 @@
-﻿// Just add this script to your camera. It doesn't need any configuration.
-
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TouchCamera : MonoBehaviour
 {
@@ -14,9 +15,12 @@ public class TouchCamera : MonoBehaviour
 
     public float minZoom;
     public float maxZoom;
+    public float cameraMargin;
 
     private Vector3 startPosition;
     private float startZoom;
+
+    private LevelManager level;
 
     private void Awake()
     {
@@ -24,6 +28,8 @@ public class TouchCamera : MonoBehaviour
 
         startPosition = cameraPlayer.transform.position;
         startZoom = cameraPlayer.orthographicSize;
+
+        level = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>();
     }
 
     private void Update()
@@ -42,11 +48,14 @@ public class TouchCamera : MonoBehaviour
             }
             else
             {
-                Vector2 newTouchPosition = Input.GetTouch(0).position;
+                if (Input.GetTouch(0).phase == TouchPhase.Moved)
+                {
+                    Vector2 newTouchPosition = Input.GetTouch(0).position;
 
-                transform.position += transform.TransformDirection((Vector3)((oldTouchPositions[0] - newTouchPosition) * cameraPlayer.orthographicSize / cameraPlayer.pixelHeight * 2f));
+                    transform.position += transform.TransformDirection((Vector3)((oldTouchPositions[0] - newTouchPosition) * cameraPlayer.orthographicSize / cameraPlayer.pixelHeight * 2f));
 
-                oldTouchPositions[0] = newTouchPosition;
+                    oldTouchPositions[0] = newTouchPosition;
+                }
             }
         }
         else
@@ -60,8 +69,6 @@ public class TouchCamera : MonoBehaviour
             }
             else
             {
-                Vector2 screen = new Vector2(cameraPlayer.pixelWidth, cameraPlayer.pixelHeight);
-
                 Vector2[] newTouchPositions = {
                     Input.GetTouch(0).position,
                     Input.GetTouch(1).position
@@ -69,9 +76,7 @@ public class TouchCamera : MonoBehaviour
                 Vector2 newTouchVector = newTouchPositions[0] - newTouchPositions[1];
                 float newTouchDistance = newTouchVector.magnitude;
 
-                transform.position += transform.TransformDirection((Vector3)((oldTouchPositions[0] + oldTouchPositions[1] - screen) * cameraPlayer.orthographicSize / screen.y));
-                cameraPlayer.orthographicSize = Mathf.Clamp(cameraPlayer.orthographicSize * (oldTouchDistance / newTouchDistance), minZoom, maxZoom);
-                transform.position -= transform.TransformDirection((newTouchPositions[0] + newTouchPositions[1] - screen) * cameraPlayer.orthographicSize / screen.y);
+                cameraPlayer.orthographicSize = Mathf.Clamp(cameraPlayer.orthographicSize * (oldTouchDistance / newTouchDistance), minZoom, (maxZoom > level.square) ? level.square : maxZoom);
 
                 oldTouchPositions[0] = newTouchPositions[0];
                 oldTouchPositions[1] = newTouchPositions[1];
@@ -79,6 +84,7 @@ public class TouchCamera : MonoBehaviour
                 oldTouchDistance = newTouchDistance;
             }
         }
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, cameraMargin, level.square - 1 - cameraMargin), Mathf.Clamp(transform.position.y, cameraMargin, level.square - 1 - cameraMargin), transform.position.z);
     }
 
     public void ResetCamera()

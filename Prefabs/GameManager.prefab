@@ -64,9 +64,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c306235ca5fd2e945b6c15669ad54e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSquare: 3
-  levelGrowth: 1
+  baseSquare: 4
+  levelGrowth: 5
+  square: 0
+  level: 500
   exit: {fileID: 1953072970296392, guid: d387ed06853c8924bae0a8e0b13f6472, type: 2}
   dirtTiles:
   - {fileID: 1129059874771222, guid: eab2894a672aca948b7737992a7c2bfe, type: 2}
-  levelFader: {fileID: 0}

@@ -12,11 +12,14 @@ public class LevelFaderController : MonoBehaviour
     public float levelDisplayDuration;
     public float fadeAwayDuration;
 
+    private LevelManager levelManager;
+
     private void Awake()
     {
+        levelManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>();
         canvas = GetComponent<CanvasGroup>();
         levelText = GetComponentInChildren<Text>();
-        levelText.text = "Level " + LevelManager.level;
+        levelText.text = levelManager.GetLevelToString();
         StartCoroutine(InitialLevelDisplay());
     }
 
@@ -28,7 +31,7 @@ public class LevelFaderController : MonoBehaviour
 
     public IEnumerator DisplayLevel()
     {
-        levelText.text = "Level " + LevelManager.level;
+        levelText.text = levelManager.GetLevelToString();
         yield return StartCoroutine(ShowLevel());
         yield return StartCoroutine(PauseLevel());
         yield return StartCoroutine(HideLevel());
@@ -48,6 +51,7 @@ public class LevelFaderController : MonoBehaviour
     public IEnumerator HideLevel()
     {
         yield return StartCoroutine(FadeImage(true));
+        canvas.alpha = 0f;
         canvas.blocksRaycasts = false;
     }
 

@@ -23,15 +23,15 @@ public class LevelManager : MonoBehaviour
     //Variables for current level and size of board
     public int baseSquare = 4;  //Base size of field
     public int levelGrowth = 5; // amount of levels before field grows
-    private int square; //Current size of field
-    public static int level = 1; // Current level
+    [HideInInspector] public int square; //Current size of field
+    public int level = 1; // Current level
 
     //Tiles to be placed on the board
     public GameObject exit; //Exit tile NOT object
     public GameObject[] dirtTiles; //Array of dirt tiles NOT objects
 
     //Controller of the level fading
-    public LevelFaderController levelFader;
+    private LevelFaderController levelFader;
 
     //UI Text displaying current level
     private GameObject currentLevel;
@@ -126,7 +126,7 @@ public class LevelManager : MonoBehaviour
 
     private void UpdateLevelCanvas()
     {
-        currentLevel.GetComponent<Text>().text = "Level " + level;
+        currentLevel.GetComponent<Text>().text = GetLevelToString();
     }
 
     private void SaveLevel()
@@ -160,5 +160,18 @@ public class LevelManager : MonoBehaviour
     private void ResetCamera()
     {
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<TouchCamera>().ResetCamera();
+    }
+
+    //For displaying purposes on canvasses
+    public String GetLevelToString()
+    {
+        if (level == 0)
+        {
+            return "Surface";
+        }
+        else
+        {
+            return "Level " + level;
+        }
     }
 }
