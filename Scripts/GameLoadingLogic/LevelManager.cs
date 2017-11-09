@@ -30,6 +30,10 @@ public class LevelManager : MonoBehaviour
     public GameObject exit; //Exit tile NOT object
     public GameObject[] dirtTiles; //Array of dirt tiles NOT objects
 
+    //Surface tiles
+    public GameObject mine;
+    public GameObject blacksmith;
+
     //Controller of the level fading
     private LevelFaderController levelFader;
 
@@ -110,12 +114,20 @@ public class LevelManager : MonoBehaviour
 
     public void SetupLevel()
     {
-        IncreaseDirtFieldSize();
-        BoardSetup();
-        InitialiseGridList();
-        PlaceExit();
+        Debug.Log("Setting up world");
+        if (level == 0)
+        {
+            CreateSurface();
+        }
+        else
+        {
+            IncreaseDirtFieldSize();
+            BoardSetup();
+            InitialiseGridList();
+            PlaceExit();
+            SaveLevel();
+        }
         UpdateLevelCanvas();
-        SaveLevel();
     }
 
     private void IncreaseDirtFieldSize()
@@ -143,7 +155,7 @@ public class LevelManager : MonoBehaviour
     public IEnumerator NextLevel()
     {
         level++;
-        //Start showing the new level 
+
         StartCoroutine(levelFader.DisplayLevel());
 
         //Wait for the fade in so we change the level while everything is blacked out
@@ -159,7 +171,20 @@ public class LevelManager : MonoBehaviour
 
     private void ResetCamera()
     {
+        Debug.Log("Resetting camera");
+
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<TouchCamera>().ResetCamera();
+    }
+
+    private void CreateSurface()
+    {
+        boardHolder = new GameObject("Surface").transform;
+
+        GameObject blacksmithObject = Instantiate(blacksmith, blacksmith.GetComponent<BlacksmithScript>().position, Quaternion.identity);
+        blacksmithObject.transform.SetParent(boardHolder);
+
+        GameObject mineObject = Instantiate(mine, mine.GetComponent<MineScript>().position, Quaternion.identity);
+        mineObject.transform.SetParent(boardHolder);
     }
 
     //For displaying purposes on canvasses

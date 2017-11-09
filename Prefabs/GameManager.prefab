@@ -67,7 +67,9 @@ MonoBehaviour:
   baseSquare: 4
   levelGrowth: 5
   square: 0
-  level: 500
+  level: 0
   exit: {fileID: 1953072970296392, guid: d387ed06853c8924bae0a8e0b13f6472, type: 2}
   dirtTiles:
   - {fileID: 1129059874771222, guid: eab2894a672aca948b7737992a7c2bfe, type: 2}
+  mine: {fileID: 1301375647006928, guid: a94e2e8463dc9304988f4f62c3d3a284, type: 2}
+  blacksmith: {fileID: 1098935018751920, guid: 2fca01cb8df613a48b8b57aee4de0f95, type: 2}
