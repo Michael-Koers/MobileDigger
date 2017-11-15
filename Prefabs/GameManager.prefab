@@ -69,6 +69,7 @@ MonoBehaviour:
   square: 0
   level: 0
   exit: {fileID: 1953072970296392, guid: d387ed06853c8924bae0a8e0b13f6472, type: 2}
+  entrance: {fileID: 1527956107131816, guid: 481248b170b329942adddb3d88cdc8e2, type: 2}
   dirtTiles:
   - {fileID: 1129059874771222, guid: eab2894a672aca948b7737992a7c2bfe, type: 2}
   mine: {fileID: 1301375647006928, guid: a94e2e8463dc9304988f4f62c3d3a284, type: 2}

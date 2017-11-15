@@ -5,10 +5,12 @@ using UnityEngine;
 public class YesButtonController : MonoBehaviour
 {
 
-    public void GoNextLevel()
+    public void ChangeLevel()
     {
-        Debug.Log("Continueing to next level!");
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>().NextLevel();
-        CanvasManager.HideCanvas(GameObject.FindGameObjectWithTag("Exit").GetComponent<ExitController>().nextLevelCanvas);
+        Debug.Log("Changing level!");
+
+        LevelController.selected.confirm();
+        //GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>().NextLevel();
+        //CanvasManager.HideCanvas(GameObject.FindGameObjectWithTag("Exit").GetComponent<ExitController>().nextLevelCanvas);
     }
 }

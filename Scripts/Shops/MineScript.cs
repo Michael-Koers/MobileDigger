@@ -10,6 +10,6 @@ public class MineScript : MonoBehaviour
     public void onMouseClick()
     {
         Debug.Log("Entered Mine");
-        StartCoroutine(GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>().NextLevel());
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>().NextLevel();
     }
 }

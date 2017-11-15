@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ExitController : LevelController
-{ 
+public class EntranceController : LevelController
+{
     public void onMouseClick()
     {
         selected = this;
@@ -13,12 +11,12 @@ public class ExitController : LevelController
 
     public override void confirm()
     {
-        Debug.Log("Exit confirmed");
+        Debug.Log("Entrance confirmed");
     }
 
     public override void cancel()
     {
-        Debug.Log("Exit cancelled");
-    }
+        Debug.Log("Entrance cancelled");
 
+    }
 }

@@ -7,7 +7,8 @@ public class NoButtonController : MonoBehaviour
 
     public void CancelNextLevel()
     {
-        ExitController exit = GameObject.FindGameObjectWithTag("Exit").GetComponent<ExitController>();
-        CanvasManager.HideCanvas(exit.nextLevelCanvas);
+        LevelController.selected.cancel();
+        //ExitController exit = GameObject.FindGameObjectWithTag("Exit").GetComponent<ExitController>();
+        //CanvasManager.HideCanvas(exit.nextLevelCanvas);
     }
 }

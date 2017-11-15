@@ -28,6 +28,7 @@ public class LevelManager : MonoBehaviour
 
     //Tiles to be placed on the board
     public GameObject exit; //Exit tile NOT object
+    public GameObject entrance; //Entrance tile
     public GameObject[] dirtTiles; //Array of dirt tiles NOT objects
 
     //Surface tiles
@@ -39,6 +40,9 @@ public class LevelManager : MonoBehaviour
 
     //UI Text displaying current level
     private GameObject currentLevel;
+
+    //Position the entrance has to be placed
+    private Vector2 entrancePosition;
 
     //Objects on the board
     private Transform boardHolder; //Empty gameobject holding all objects
@@ -62,6 +66,10 @@ public class LevelManager : MonoBehaviour
         {
             for (int y = 0; y < square; y++)
             {
+                if (entrancePosition.x == x && entrancePosition.y == y)
+                {
+                    continue;
+                }
                 gridPositions.Add(new Vector3(x, y, 0.0f));
             }
         }
@@ -75,6 +83,10 @@ public class LevelManager : MonoBehaviour
         {
             for (int y = 0; y < square; y++)
             {
+                if (entrancePosition.x == x && entrancePosition.y == y)
+                {
+                    continue;
+                }
                 GameObject toInstantiate = dirtTiles[Random.Range(0, dirtTiles.Length)];
 
                 GameObject instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
@@ -107,11 +119,22 @@ public class LevelManager : MonoBehaviour
 
     private void PlaceExit()
     {
-        GameObject exitObject = Instantiate(exit, RandomPosition(), Quaternion.identity);
+
+        Vector3 position = RandomPosition();
+        GameObject exitObject = Instantiate(exit, position, Quaternion.identity);
         Debug.Log("exit placed @: " + exitObject.transform.position);
         exitObject.transform.SetParent(boardHolder);
+
+        //Update the entrance position for the next level
+        entrancePosition = position;
     }
 
+    private void PlaceEntrance()
+    {
+        GameObject entranceObject = Instantiate(entrance, entrancePosition, Quaternion.identity);
+        Debug.Log("entrance placed @: " + entranceObject.transform.position);
+        entranceObject.transform.SetParent(boardHolder);
+    }
     public void SetupLevel()
     {
         Debug.Log("Setting up world");
@@ -124,6 +147,7 @@ public class LevelManager : MonoBehaviour
             IncreaseDirtFieldSize();
             BoardSetup();
             InitialiseGridList();
+            PlaceEntrance();
             PlaceExit();
             SaveLevel();
         }
@@ -152,10 +176,8 @@ public class LevelManager : MonoBehaviour
         Destroy(boardHolder.gameObject);
     }
 
-    public IEnumerator NextLevel()
+    public IEnumerator GoToLevel()
     {
-        level++;
-
         StartCoroutine(levelFader.DisplayLevel());
 
         //Wait for the fade in so we change the level while everything is blacked out
@@ -167,6 +189,18 @@ public class LevelManager : MonoBehaviour
         ResetCamera();
 
         SetupLevel();
+    }
+
+    public void NextLevel()
+    {
+        level++;
+        StartCoroutine(GoToLevel());
+    }
+
+    public void PreviousLevel()
+    {
+        level--;
+        StartCoroutine(GoToLevel());
     }
 
     private void ResetCamera()
@@ -184,6 +218,7 @@ public class LevelManager : MonoBehaviour
         blacksmithObject.transform.SetParent(boardHolder);
 
         GameObject mineObject = Instantiate(mine, mine.GetComponent<MineScript>().position, Quaternion.identity);
+        entrancePosition = mine.GetComponent<MineScript>().position;
         mineObject.transform.SetParent(boardHolder);
     }
 

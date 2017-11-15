@@ -1850,7 +1850,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 762253870}
-          m_MethodName: GoNextLevel
+          m_MethodName: ChangeLevel
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
