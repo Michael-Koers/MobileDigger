@@ -45,11 +45,11 @@ public class LevelManager : MonoBehaviour
     private Vector2 entrancePosition;
 
     //Objects on the board
-    private Transform boardHolder; //Empty gameobject holding all objects
+    private GameObject boardHolder; //Empty gameobject holding all objects
     private List<Vector3> gridPositions = new List<Vector3>();
 
     //Collection of all the levels by level number
-    private Dictionary<int, Transform> levels = new Dictionary<int, Transform>();
+    [HideInInspector] public Dictionary<int, GameObject> levels = new Dictionary<int, GameObject>();
 
     private void Awake()
     {
@@ -77,7 +77,7 @@ public class LevelManager : MonoBehaviour
 
     private void BoardSetup()
     {
-        boardHolder = new GameObject("Level" + level).transform;
+        boardHolder = new GameObject("Level" + level);
 
         for (int x = 0; x < square; x++)
         {
@@ -91,7 +91,7 @@ public class LevelManager : MonoBehaviour
 
                 GameObject instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
 
-                instance.transform.SetParent(boardHolder);
+                instance.transform.SetParent(boardHolder.transform);
             }
         }
     }
@@ -123,7 +123,7 @@ public class LevelManager : MonoBehaviour
         Vector3 position = RandomPosition();
         GameObject exitObject = Instantiate(exit, position, Quaternion.identity);
         Debug.Log("exit placed @: " + exitObject.transform.position);
-        exitObject.transform.SetParent(boardHolder);
+        exitObject.transform.SetParent(boardHolder.transform);
 
         //Update the entrance position for the next level
         entrancePosition = position;
@@ -133,19 +133,22 @@ public class LevelManager : MonoBehaviour
     {
         GameObject entranceObject = Instantiate(entrance, entrancePosition, Quaternion.identity);
         Debug.Log("entrance placed @: " + entranceObject.transform.position);
-        entranceObject.transform.SetParent(boardHolder);
+        entranceObject.transform.SetParent(boardHolder.transform);
     }
     public void SetupLevel()
     {
         Debug.Log("Setting up world");
-        if (level == 0)
-        {
-            CreateSurface();
-        }
-        else if (levels.ContainsKey(level))
+
+        //If the level was once already created and saved, load the level
+        if (levels.ContainsKey(level))
         {
             levels[level].gameObject.SetActive(true);
             boardHolder = levels[level];
+        }
+        else if (level == 0)
+        {
+            CreateSurface();
+            SaveLevel();
         }
         else
         {
@@ -170,6 +173,7 @@ public class LevelManager : MonoBehaviour
         currentLevel.GetComponent<Text>().text = GetLevelToString();
     }
 
+    //Localy saves the levels in a dictionary
     private void SaveLevel()
     {
         //if the level already exists in the dictionary, override the value
@@ -186,6 +190,12 @@ public class LevelManager : MonoBehaviour
         Debug.Log("amount of levels saved: " + levels.Count);
     }
 
+    //Calls the save function on the gamecontroller to save the player data in a file
+    private void SaveToFile()
+    {
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().Save();
+    }
+
     private void ClearLevel()
     {
         boardHolder.gameObject.SetActive(false);
@@ -193,6 +203,8 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator GoToLevel()
     {
+        SaveToFile();
+
         StartCoroutine(levelFader.DisplayLevel());
 
         //Wait for the fade in so we change the level while everything is blacked out
@@ -227,14 +239,14 @@ public class LevelManager : MonoBehaviour
 
     private void CreateSurface()
     {
-        boardHolder = new GameObject("Surface").transform;
+        boardHolder = new GameObject("Surface");
 
         GameObject blacksmithObject = Instantiate(blacksmith, blacksmith.GetComponent<BlacksmithScript>().position, Quaternion.identity);
-        blacksmithObject.transform.SetParent(boardHolder);
+        blacksmithObject.transform.SetParent(boardHolder.transform);
 
         GameObject mineObject = Instantiate(mine, mine.GetComponent<MineScript>().position, Quaternion.identity);
         entrancePosition = mine.GetComponent<MineScript>().position;
-        mineObject.transform.SetParent(boardHolder);
+        mineObject.transform.SetParent(boardHolder.transform);
     }
 
     //For displaying purposes on canvasses

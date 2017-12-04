@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     void onLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
+        Load();
         InitGame();
     }
 
@@ -46,17 +49,46 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= onLevelFinishedLoading;
     }
 
-    public void GameOver()
-    {
-        //levelText.text = "After " + level + " days, you starved ..";
-        //levelImage.SetActive(true);
-        //enabled = false;
-    }
-
-
     void InitGame()
     {
         boardScript.SetupLevel();
     }
 
+    public void Save()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/playerData.dat");
+
+        PlayerData data = new PlayerData()
+        {
+            levels = boardScript.levels,
+            gold = Player.player.score
+        };
+
+        bf.Serialize(file, data);
+        file.Close();
+    }
+
+    public void Load()
+    {
+        if (File.Exists(Application.persistentDataPath + "/playerData.dat"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
+            PlayerData data = (PlayerData)bf.Deserialize(file);
+            file.Close();
+
+            Player.player.score = data.gold;
+
+            boardScript.levels = data.levels;
+
+        }
+    }
+
+    [Serializable]
+    public class PlayerData
+    {
+        public Dictionary<int, GameObject> levels;
+        public float gold;
+    }
 }
