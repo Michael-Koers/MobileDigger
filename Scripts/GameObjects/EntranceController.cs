@@ -5,18 +5,14 @@ public class EntranceController : LevelController
     public void onMouseClick()
     {
         selected = this;
-        CanvasManager.ShowCanvas(nextLevelCanvas);
+        yesNoController.SetMessage(prevLevelMessage);
+        CanvasManager.ShowCanvas(yesNoCanvas);
         UnselectDirt();
     }
 
-    public override void confirm()
+    public override void Confirm()
     {
-        Debug.Log("Entrance confirmed");
-    }
-
-    public override void cancel()
-    {
-        Debug.Log("Entrance cancelled");
-
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>().PreviousLevel();
+        CloseCanvas();
     }
 }

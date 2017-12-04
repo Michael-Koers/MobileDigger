@@ -200,8 +200,8 @@ GameObject:
   - component: {fileID: 82520694}
   - component: {fileID: 82520696}
   m_Layer: 5
-  m_Name: ContinuePanel
-  m_TagString: Untagged
+  m_Name: YesNoPanel
+  m_TagString: YesNoPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640fe9723e6978d4393ed5eed4e375df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textPanel: {fileID: 1680145380}
 --- !u!1 &82747152
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,8 +708,8 @@ GameObject:
   - component: {fileID: 212471604}
   - component: {fileID: 212471608}
   m_Layer: 5
-  m_Name: NextLevelCanvas
-  m_TagString: NextLevelCanvas
+  m_Name: YesNoCanvas
+  m_TagString: YesNoCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -953,7 +954,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 354356660}
-          m_MethodName: CancelNextLevel
+          m_MethodName: NoActionHandler
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1830,7 +1831,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 762253865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71f61454a3de8534993554738aadef80, type: 3}
+  m_Script: {fileID: 11500000, guid: c6d3ea2492ef23543a4b925f01533e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &762253871
@@ -1850,7 +1851,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 762253870}
-          m_MethodName: ChangeLevel
+          m_MethodName: YesActionHandler
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3012,7 +3013,7 @@ GameObject:
   - component: {fileID: 1680145383}
   - component: {fileID: 1680145382}
   m_Layer: 5
-  m_Name: ContinueText
+  m_Name: MessageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3068,7 +3069,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Continue to next level?
+  m_Text: insert custom text
 --- !u!222 &1680145383
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -142,6 +142,11 @@ public class LevelManager : MonoBehaviour
         {
             CreateSurface();
         }
+        else if (levels.ContainsKey(level))
+        {
+            levels[level].gameObject.SetActive(true);
+            boardHolder = levels[level];
+        }
         else
         {
             IncreaseDirtFieldSize();
@@ -167,13 +172,23 @@ public class LevelManager : MonoBehaviour
 
     private void SaveLevel()
     {
-        levels.Add(level, boardHolder);
+        //if the level already exists in the dictionary, override the value
+        if (levels.ContainsKey(level))
+        {
+            levels[level] = boardHolder;
+        }
+        else
+        {
+            levels.Add(level, boardHolder);
+        }
+
+
         Debug.Log("amount of levels saved: " + levels.Count);
     }
 
     private void ClearLevel()
     {
-        Destroy(boardHolder.gameObject);
+        boardHolder.gameObject.SetActive(false);
     }
 
     public IEnumerator GoToLevel()

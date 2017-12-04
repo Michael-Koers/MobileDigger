@@ -3,22 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ExitController : LevelController
-{ 
+{
     public void onMouseClick()
     {
         selected = this;
-        CanvasManager.ShowCanvas(nextLevelCanvas);
+        yesNoController.SetMessage(nextLevelMessage);
+        CanvasManager.ShowCanvas(yesNoCanvas);
         UnselectDirt();
     }
 
-    public override void confirm()
+    public override void Confirm()
     {
-        Debug.Log("Exit confirmed");
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>().NextLevel();
+        CloseCanvas();
     }
-
-    public override void cancel()
-    {
-        Debug.Log("Exit cancelled");
-    }
-
 }
