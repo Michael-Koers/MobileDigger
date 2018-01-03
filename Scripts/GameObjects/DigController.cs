@@ -11,8 +11,8 @@ public class DigController : MonoBehaviour
     private void Awake()
     {
         CanvasGroup canvas = GetComponentInParent<CanvasGroup>();
-        canvas.alpha = 0f;
-        canvas.blocksRaycasts = false;
+
+        CanvasManager.HideCanvas(canvas);
 
         loadingBar = GameObject.Find("LoadingBar").GetComponent<Image>();
 

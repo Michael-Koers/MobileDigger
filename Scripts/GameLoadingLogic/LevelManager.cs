@@ -25,10 +25,10 @@ public class LevelManager : MonoBehaviour
     {
         public GameObject gem;
         public Count levelApperance;
-        public float spawnRate; 
+        public int spawnRate;
     }
 
-    public GemConfiguration[] gems;
+    public List<GemConfiguration> gems;
 
     //Variables for current level and size of board
     public int baseSquare = 4;  //Base size of field
@@ -147,7 +147,30 @@ public class LevelManager : MonoBehaviour
 
     private void PlaceGems()
     {
+        foreach (GemConfiguration config in gems)
+        {
+            if (config.levelApperance.maximum >= level && config.levelApperance.minimum <= level)
+            {
+                float spawnNumber = Random.Range(0, config.spawnRate);
+                float spawnAmount = 0;
 
+                for (int i = 0; i < gridPositions.Count; i++)
+                {
+                    if (spawnNumber == Random.Range(0, config.spawnRate))
+                    {
+                        spawnAmount++;
+                    }
+                }
+
+                for (int i = 0; i < spawnAmount; i++)
+                {
+                    Vector3 randomPosition = RandomPosition();
+                    GameObject gemObject = Instantiate(config.gem, randomPosition, Quaternion.identity);
+                    Debug.Log("Gem: " + config.gem.name + " was placed @: " + gemObject.transform.position);
+                    gemObject.transform.SetParent(boardHolder.transform);
+                }
+            }
+        }
     }
 
     public void SetupLevel()

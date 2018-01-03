@@ -65,11 +65,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gems:
-  - gem: {fileID: 1258298133549274, guid: 05dd5bf726f16254b824dca8aa4acca8, type: 2}
+  - gem: {fileID: 1838574451715376, guid: 05dd5bf726f16254b824dca8aa4acca8, type: 2}
     levelApperance:
       minimum: 1
       maximum: 5
-    spawnRate: 20
+    spawnRate: 2
   baseSquare: 4
   levelGrowth: 5
   square: 0
