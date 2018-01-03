@@ -5,28 +5,25 @@ using UnityEngine;
 public class Gem : MonoBehaviour
 {
     public int value;
-    public string gemName;
+    [HideInInspector] public string gemName;
 
-    public void Awake()
-    {
-        transform.rotation = Quaternion.Euler(-90, 0, 0);
-        transform.position = new Vector3(transform.position.x, transform.position.y, -5);
-    }
+    public bool rotateClockwise;
+    public float rotationSpeed;
 
-    public void PickUp()
+    public virtual void PickUp()
     {
         Player.AddPoints(value);
         Destroy(this.gameObject);
     }
 
-    public void OnMouseDown()
+    public virtual void onMouseClick()
     {
         PickUp();
     }
 
-    public void OnBecameVisible()
+    public virtual void Update()
     {
-        GetComponent<AnimationScript>().isAnimated = true;
-        GetComponent<AnimationScript>().isRotating = true;
+        transform.Rotate(new Vector3(0, 0, ((rotateClockwise ? 1 : -1) * rotationSpeed * Time.deltaTime)));
     }
+
 }
