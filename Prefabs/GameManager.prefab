@@ -64,6 +64,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c306235ca5fd2e945b6c15669ad54e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gems:
+  - gem: {fileID: 1258298133549274, guid: 05dd5bf726f16254b824dca8aa4acca8, type: 2}
+    levelApperance:
+      minimum: 1
+      maximum: 5
+    spawnRate: 20
   baseSquare: 4
   levelGrowth: 5
   square: 0

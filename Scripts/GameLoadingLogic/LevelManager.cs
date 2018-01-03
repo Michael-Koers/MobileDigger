@@ -20,6 +20,16 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    [Serializable]
+    public class GemConfiguration
+    {
+        public GameObject gem;
+        public Count levelApperance;
+        public float spawnRate; 
+    }
+
+    public GemConfiguration[] gems;
+
     //Variables for current level and size of board
     public int baseSquare = 4;  //Base size of field
     public int levelGrowth = 5; // amount of levels before field grows
@@ -119,7 +129,6 @@ public class LevelManager : MonoBehaviour
 
     private void PlaceExit()
     {
-
         Vector3 position = RandomPosition();
         GameObject exitObject = Instantiate(exit, position, Quaternion.identity);
         Debug.Log("exit placed @: " + exitObject.transform.position);
@@ -135,6 +144,12 @@ public class LevelManager : MonoBehaviour
         Debug.Log("entrance placed @: " + entranceObject.transform.position);
         entranceObject.transform.SetParent(boardHolder.transform);
     }
+
+    private void PlaceGems()
+    {
+
+    }
+
     public void SetupLevel()
     {
         Debug.Log("Setting up world");
@@ -157,6 +172,7 @@ public class LevelManager : MonoBehaviour
             InitialiseGridList();
             PlaceEntrance();
             PlaceExit();
+            PlaceGems();
             SaveLevel();
         }
         UpdateLevelCanvas();
@@ -190,12 +206,6 @@ public class LevelManager : MonoBehaviour
         Debug.Log("amount of levels saved: " + levels.Count);
     }
 
-    //Calls the save function on the gamecontroller to save the player data in a file
-    private void SaveToFile()
-    {
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().Save();
-    }
-
     private void ClearLevel()
     {
         boardHolder.gameObject.SetActive(false);
@@ -203,8 +213,6 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator GoToLevel()
     {
-        SaveToFile();
-
         StartCoroutine(levelFader.DisplayLevel());
 
         //Wait for the fade in so we change the level while everything is blacked out

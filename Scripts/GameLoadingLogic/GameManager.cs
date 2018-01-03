@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     void onLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        Load();
+        //Load();
         InitGame();
     }
 
@@ -54,41 +54,41 @@ public class GameManager : MonoBehaviour
         boardScript.SetupLevel();
     }
 
-    public void Save()
-    {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/playerData.dat");
+    //public void Save()
+    //{
+    //    BinaryFormatter bf = new BinaryFormatter();
+    //    FileStream file = File.Create(Application.persistentDataPath + "/playerData.dat");
 
-        PlayerData data = new PlayerData()
-        {
-            levels = boardScript.levels,
-            gold = Player.player.score
-        };
+    //    PlayerData data = new PlayerData()
+    //    {
+    //        levels = boardScript.levels,
+    //        gold = Player.player.score
+    //    };
 
-        bf.Serialize(file, data);
-        file.Close();
-    }
+    //    bf.Serialize(file, data);
+    //    file.Close();
+    //}
 
-    public void Load()
-    {
-        if (File.Exists(Application.persistentDataPath + "/playerData.dat"))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
-            PlayerData data = (PlayerData)bf.Deserialize(file);
-            file.Close();
+    //public void Load()
+    //{
+    //    if (File.Exists(Application.persistentDataPath + "/playerData.dat"))
+    //    {
+    //        BinaryFormatter bf = new BinaryFormatter();
+    //        FileStream file = File.Open(Application.persistentDataPath + "/playerData.dat", FileMode.Open);
+    //        PlayerData data = (PlayerData)bf.Deserialize(file);
+    //        file.Close();
 
-            Player.player.score = data.gold;
+    //        Player.player.score = data.gold;
 
-            boardScript.levels = data.levels;
+    //        boardScript.levels = data.levels;
 
-        }
-    }
+    //    }
+    //}
 
-    [Serializable]
-    public class PlayerData
-    {
-        public Dictionary<int, GameObject> levels;
-        public float gold;
-    }
+    //[Serializable]
+    //public class PlayerData
+    //{
+    //    public Dictionary<int, GameObject> levels;
+    //    public float gold;
+    //}
 }
