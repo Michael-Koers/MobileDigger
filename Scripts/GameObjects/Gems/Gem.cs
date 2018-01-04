@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gem : MonoBehaviour
+public abstract class Gem : MonoBehaviour
 {
     public int value;
     [HideInInspector] public string gemName;

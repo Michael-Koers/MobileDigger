@@ -41,9 +41,17 @@ public class LevelManager : MonoBehaviour
     public GameObject entrance; //Entrance tile
     public GameObject[] dirtTiles; //Array of dirt tiles NOT objects
 
-    //Surface tiles
-    public GameObject mine;
-    public GameObject blacksmith;
+    [Serializable]
+    public class Shops
+    {
+        //Surface objects
+        public GameObject mine;
+        public GameObject blacksmith;
+        public GameObject merchant;
+    }
+
+    //Collection of all surface shops
+    public Shops shops;
 
     //Controller of the level fading
     private LevelFaderController levelFader;
@@ -275,12 +283,15 @@ public class LevelManager : MonoBehaviour
     {
         boardHolder = new GameObject("Surface");
 
-        GameObject blacksmithObject = Instantiate(blacksmith, blacksmith.GetComponent<BlacksmithScript>().position, Quaternion.identity);
+        GameObject blacksmithObject = Instantiate(shops.blacksmith, shops.blacksmith.GetComponent<ShopController>().position, Quaternion.identity);
         blacksmithObject.transform.SetParent(boardHolder.transform);
 
-        GameObject mineObject = Instantiate(mine, mine.GetComponent<MineScript>().position, Quaternion.identity);
-        entrancePosition = mine.GetComponent<MineScript>().position;
+        GameObject mineObject = Instantiate(shops.mine, shops.mine.GetComponent<ShopController>().position, Quaternion.identity);
+        entrancePosition = shops.mine.GetComponent<ShopController>().position;
         mineObject.transform.SetParent(boardHolder.transform);
+
+        GameObject merchantObject = Instantiate(shops.merchant, shops.merchant.GetComponent<ShopController>().position, Quaternion.identity);
+        merchantObject.transform.SetParent(boardHolder.transform);
     }
 
     //For displaying purposes on canvasses

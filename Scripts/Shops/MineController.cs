@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MineScript : MonoBehaviour
+public class MineController : ShopController
 {
-
-    public Vector2 position;
-
-    public void onMouseClick()
+    public override void onMouseClick()
     {
         Debug.Log("Entered Mine");
         GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>().NextLevel();

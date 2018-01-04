@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlacksmithScript : MonoBehaviour {
-
+public abstract class ShopController : MonoBehaviour
+{
     public Vector2 position;
+
+    public abstract void onMouseClick();
 }

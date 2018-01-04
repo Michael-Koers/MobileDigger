@@ -52,7 +52,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -109,16 +109,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3e95011cbbcd54686a3d434d30ca71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 100
+  value: 50
   gemName: Diamond
-  isSpinning: 0
-  isScaling: 1
-  rotateClockwise: 0
-  rotationSpeed: 0
-  startScale: {x: 0.9, y: 0.9, z: 0.9}
-  endScale: {x: 0.7, y: 0.7, z: 0.7}
-  scaleSpeed: 1
-  scaleRate: 1
+  animation:
+    isSpinning: 0
+    isScaling: 1
+    rotateClockwise: 0
+    rotationSpeed: 0
+    startScale: {x: 0.9, y: 0.9, z: 0.9}
+    endScale: {x: 0.6, y: 0.6, z: 0.6}
+    scalingUp: 1
+    scaleSpeed: 2
+    scaleRate: 1
+    scaleTimer: 0
 --- !u!212 &212389971408138918
 SpriteRenderer:
   m_ObjectHideFlags: 1

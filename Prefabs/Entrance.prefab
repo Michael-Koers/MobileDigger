@@ -52,7 +52,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -109,7 +109,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9739650dd6f4247b055251e2800183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevelCanvas: {fileID: 0}
+  nextLevelMessage: Continue to next level?
+  prevLevelMessage: Back to previous level?
+  yesNoCanvas: {fileID: 0}
+  yesNoController: {fileID: 0}
 --- !u!212 &212458707671254204
 SpriteRenderer:
   m_ObjectHideFlags: 1
