@@ -38,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1730783559850254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.85, y: 0.85, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 15
   gemName: 
-  animation:
+  anim:
     isSpinning: 0
     isScaling: 0
     rotateClockwise: 0

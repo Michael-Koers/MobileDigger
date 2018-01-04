@@ -287,11 +287,12 @@ public class LevelManager : MonoBehaviour
         blacksmithObject.transform.SetParent(boardHolder.transform);
 
         GameObject mineObject = Instantiate(shops.mine, shops.mine.GetComponent<ShopController>().position, Quaternion.identity);
-        entrancePosition = shops.mine.GetComponent<ShopController>().position;
         mineObject.transform.SetParent(boardHolder.transform);
 
         GameObject merchantObject = Instantiate(shops.merchant, shops.merchant.GetComponent<ShopController>().position, Quaternion.identity);
         merchantObject.transform.SetParent(boardHolder.transform);
+
+        entrancePosition = new Vector2(0, 0);
     }
 
     //For displaying purposes on canvasses

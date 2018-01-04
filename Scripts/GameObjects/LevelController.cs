@@ -8,6 +8,7 @@ abstract public class LevelController : MonoBehaviour
 
     [HideInInspector] public string nextLevelMessage = "Continue to next level?";
     [HideInInspector] public string prevLevelMessage = "Back to previous level?";
+    [HideInInspector] public string enterMineMessage = "Delve into the abandoned mine?";
 
     [HideInInspector] public CanvasGroup yesNoCanvas;
     [HideInInspector] public YesNoPanelController yesNoController;

@@ -76,7 +76,15 @@ public class TouchCamera : MonoBehaviour
                 Vector2 newTouchVector = newTouchPositions[0] - newTouchPositions[1];
                 float newTouchDistance = newTouchVector.magnitude;
 
-                cameraPlayer.orthographicSize = Mathf.Clamp(cameraPlayer.orthographicSize * (oldTouchDistance / newTouchDistance), minZoom, (maxZoom > level.square) ? level.square : maxZoom);
+                if (level.level == 0)
+                {
+                    cameraPlayer.orthographicSize = Mathf.Clamp(cameraPlayer.orthographicSize * (oldTouchDistance / newTouchDistance), minZoom / 2, maxZoom / 2);
+                }
+                else
+                {
+                    cameraPlayer.orthographicSize = Mathf.Clamp(cameraPlayer.orthographicSize * (oldTouchDistance / newTouchDistance), minZoom, (maxZoom > level.square) ? level.square : maxZoom);
+                }
+
 
                 oldTouchPositions[0] = newTouchPositions[0];
                 oldTouchPositions[1] = newTouchPositions[1];
@@ -84,7 +92,14 @@ public class TouchCamera : MonoBehaviour
                 oldTouchDistance = newTouchDistance;
             }
         }
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, cameraMargin, level.square - 1 - cameraMargin), Mathf.Clamp(transform.position.y, cameraMargin, level.square - 1 - cameraMargin), transform.position.z);
+        if (level.level == 0)
+        {
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -1, 1), Mathf.Clamp(transform.position.y, -2, 2), transform.position.z);
+        }
+        else
+        {
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, cameraMargin, level.square - 1 - cameraMargin), Mathf.Clamp(transform.position.y, cameraMargin, level.square - 1 - cameraMargin), transform.position.z);
+        }
     }
 
     public void ResetCamera()

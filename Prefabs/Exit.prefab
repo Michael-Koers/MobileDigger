@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4021644438504040}
   - component: {fileID: 212696397864726652}
+  - component: {fileID: 61400204440034170}
   - component: {fileID: 114041349693267640}
   - component: {fileID: 114734382138892414}
-  - component: {fileID: 61400204440034170}
   m_Layer: 0
   m_Name: Exit
   m_TagString: Exit
@@ -81,6 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextLevelMessage: Continue to next level?
   prevLevelMessage: Back to previous level?
+  enterMineMessage: Do you want to delve into the mine?
   yesNoCanvas: {fileID: 0}
   yesNoController: {fileID: 0}
 --- !u!114 &114734382138892414

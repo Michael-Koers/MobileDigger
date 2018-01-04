@@ -26,7 +26,7 @@ public abstract class Gem : MonoBehaviour
         [HideInInspector] public float scaleTimer;
     }
 
-    public Animation animation;
+    public Animation anim;
 
     public virtual void PickUp()
     {
@@ -41,28 +41,28 @@ public abstract class Gem : MonoBehaviour
 
     public virtual void Update()
     {
-        if (animation.isSpinning)
+        if (anim.isSpinning)
         {
-            transform.Rotate(new Vector3(0, 0, ((animation.rotateClockwise ? 1 : -1) * animation.rotationSpeed * Time.deltaTime)));
+            transform.Rotate(new Vector3(0, 0, ((anim.rotateClockwise ? 1 : -1) * anim.rotationSpeed * Time.deltaTime)));
         }
-        if (animation.isScaling)
+        if (anim.isScaling)
         {
-            animation.scaleTimer += Time.deltaTime;
+            anim.scaleTimer += Time.deltaTime;
 
-            if (animation.scalingUp)
+            if (anim.scalingUp)
             {
-                transform.localScale = Vector3.Lerp(transform.localScale, animation.endScale, animation.scaleSpeed * Time.deltaTime);
+                transform.localScale = Vector3.Lerp(transform.localScale, anim.endScale, anim.scaleSpeed * Time.deltaTime);
             }
-            else if (!animation.scalingUp)
+            else if (!anim.scalingUp)
             {
-                transform.localScale = Vector3.Lerp(transform.localScale, animation.startScale, animation.scaleSpeed * Time.deltaTime);
+                transform.localScale = Vector3.Lerp(transform.localScale, anim.startScale, anim.scaleSpeed * Time.deltaTime);
             }
 
-            if (animation.scaleTimer >= animation.scaleRate)
+            if (anim.scaleTimer >= anim.scaleRate)
             {
-                if (animation.scalingUp) { animation.scalingUp = false; }
-                else if (!animation.scalingUp) { animation.scalingUp = true; }
-                animation.scaleTimer = 0;
+                if (anim.scalingUp) { anim.scalingUp = false; }
+                else if (!anim.scalingUp) { anim.scalingUp = true; }
+                anim.scaleTimer = 0;
             }
         }
     }
