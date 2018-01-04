@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmeraldController : Gem
+public class DiamondController : Gem
 {
-
     private void Start()
     {
-        this.gemName = "Emerald";
+        this.gemName = "Diamond";
     }
 }

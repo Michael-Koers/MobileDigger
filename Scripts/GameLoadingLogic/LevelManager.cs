@@ -110,7 +110,6 @@ public class LevelManager : MonoBehaviour
     {
         int randomIndex = Random.Range(0, gridPositions.Count);
 
-        Debug.Log("Randomindex: " + randomIndex + ", grid count: " + gridPositions.Count);
         Vector3 randomPosition = gridPositions[randomIndex];
         gridPositions.RemoveAt(randomIndex);
         return randomPosition;
@@ -141,7 +140,6 @@ public class LevelManager : MonoBehaviour
     private void PlaceEntrance()
     {
         GameObject entranceObject = Instantiate(entrance, entrancePosition, Quaternion.identity);
-        Debug.Log("entrance placed @: " + entranceObject.transform.position);
         entranceObject.transform.SetParent(boardHolder.transform);
     }
 
@@ -149,24 +147,29 @@ public class LevelManager : MonoBehaviour
     {
         foreach (GemConfiguration config in gems)
         {
-            if (config.levelApperance.maximum >= level && config.levelApperance.minimum <= level)
+            if (config.levelApperance.minimum <= level && config.levelApperance.maximum >= level)
             {
-                float spawnNumber = Random.Range(0, config.spawnRate);
+                //'Corrected spawn rate', make gems more common in later levels they appear in
+                int correctedSpawnRate = config.spawnRate - (level - config.levelApperance.minimum);
+
+                Debug.Log("Gem: " + config.gem.name + ". Normal spawn: 1/" + config.spawnRate + ". Adjusted spawn: 1/" + correctedSpawnRate);
+                float spawnNumber = Random.Range(0, correctedSpawnRate);
                 float spawnAmount = 0;
 
                 for (int i = 0; i < gridPositions.Count; i++)
                 {
-                    if (spawnNumber == Random.Range(0, config.spawnRate))
+                    if (spawnNumber == Random.Range(0, correctedSpawnRate))
                     {
                         spawnAmount++;
                     }
                 }
 
+                Debug.Log("Spawning " + spawnAmount + "x " + config.gem.name + ".");
+
                 for (int i = 0; i < spawnAmount; i++)
                 {
                     Vector3 randomPosition = RandomPosition();
                     GameObject gemObject = Instantiate(config.gem, randomPosition, Quaternion.identity);
-                    Debug.Log("Gem: " + config.gem.name + " was placed @: " + gemObject.transform.position);
                     gemObject.transform.SetParent(boardHolder.transform);
                 }
             }

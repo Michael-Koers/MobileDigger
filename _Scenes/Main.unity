@@ -2286,7 +2286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minZoom: 4
-  maxZoom: 10
+  maxZoom: 15
   cameraMargin: 1
 --- !u!114 &1080196961
 MonoBehaviour:

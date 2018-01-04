@@ -6,6 +6,7 @@ public class SapphireController : Gem
 {
     private void Start()
     {
-        this.name = "Sapphire";
+        this.gemName = "Sapphire";
     }
+
 }

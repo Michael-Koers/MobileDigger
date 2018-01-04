@@ -59,7 +59,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.79, y: 0.78}
+    oldSize: {x: 0.7, y: 0.7}
     newSize: {x: 0.79, y: 0.78}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -111,8 +111,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 10
   gemName: Sapphire
+  isSpinning: 1
+  isScaling: 0
   rotateClockwise: 0
   rotationSpeed: 15
+  startScale: {x: 0, y: 0, z: 0}
+  endScale: {x: 0, y: 0, z: 0}
+  scaleSpeed: 0
+  scaleRate: 0
 --- !u!212 &212709345904090446
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -54,7 +54,7 @@ public class DirtController : MonoBehaviour
 
     public void DamageDirt()
     {
-        selected.currentHP -= Player.player.damage;
+        selected.currentHP -= Player.player.playerDamage;
         if (selected.currentHP <= 0)
         {
             Player.AddPoints(value);

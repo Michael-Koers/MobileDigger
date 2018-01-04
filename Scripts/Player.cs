@@ -6,7 +6,30 @@ public class Player : MonoBehaviour
 {
 
     public static Player player;
+    public bool isGodMode;
+
     public int damage;
+
+    //Use a different variable in rest of application to allow easy 'God mode' coding
+    public int playerDamage
+    {
+        get
+        {
+            if (isGodMode)
+            {
+                return 9999;
+            }
+            else
+            {
+                return damage;
+            }
+        }
+        set
+        {
+            damage = value;
+        }
+    }
+
     public float score;
 
     private void Awake()
