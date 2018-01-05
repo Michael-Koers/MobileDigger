@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class MerchantController : ShopController
 {
-    public override void onMouseClick()
+    public override void closeShop()
     {
-        Debug.Log("Clicked on merchant");
+        throw new System.NotImplementedException();
+    }
+
+    public override void openShop()
+    {
+        Debug.Log("clicked merchant");
     }
 }

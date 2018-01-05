@@ -4,8 +4,23 @@ using UnityEngine;
 
 public class BlacksmithController : ShopController
 {
-    public override void onMouseClick()
+    private Animator blacksmithAnimation;
+    private static string blacksmithAnimationBoolean = "blacksmithOpen";
+
+    public void Awake()
     {
-        Debug.Log("Clicked on blacksmith");
+        blacksmithAnimation = GameObject.FindGameObjectWithTag("BlacksmithCanvas").GetComponent<Animator>(); ;
     }
+
+    public override void openShop()
+    {
+        blacksmithAnimation.SetBool(blacksmithAnimationBoolean, true);
+        openedShop = this;
+    }
+
+    public override void closeShop()
+    {
+        blacksmithAnimation.SetBool(blacksmithAnimationBoolean, false);
+    }
+
 }

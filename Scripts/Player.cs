@@ -49,4 +49,12 @@ public class Player : MonoBehaviour
     {
         player.score += points;
     }
+
+    public static void SubtractPoints(int points)
+    {
+        if (player.score >= points)
+        {
+            player.score -= points;
+        }
+    }
 }

@@ -6,5 +6,8 @@ public abstract class ShopController : MonoBehaviour
 {
     public Vector2 position;
 
-    public abstract void onMouseClick();
+    public static ShopController openedShop;
+
+    public abstract void closeShop();
+    public abstract void openShop();
 }

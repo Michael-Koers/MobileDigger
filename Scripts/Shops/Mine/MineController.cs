@@ -28,7 +28,11 @@ public class MineController : ShopController
         message = gameObject.AddComponent<MineMessage>();
     }
 
-    public override void onMouseClick()
+    public override void closeShop()
+    {
+    }
+
+    public override void openShop()
     {
         message.showMessage();
     }

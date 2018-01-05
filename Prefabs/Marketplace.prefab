@@ -75,7 +75,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114486217080039084}
-          m_MethodName: onMouseClick
+          m_MethodName: openShop
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
