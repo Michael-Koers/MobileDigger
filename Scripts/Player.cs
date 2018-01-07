@@ -8,7 +8,9 @@ public class Player : MonoBehaviour
     public static Player player;
     public bool isGodMode;
 
-    public int damage;
+    public Pickaxe pickaxe = new Pickaxe(1, 0, "Wooden pickaxe");
+
+    public float score;
 
     //Use a different variable in rest of application to allow easy 'God mode' coding
     public int playerDamage
@@ -21,16 +23,10 @@ public class Player : MonoBehaviour
             }
             else
             {
-                return damage;
+                return pickaxe.damage;
             }
         }
-        set
-        {
-            damage = value;
-        }
     }
-
-    public float score;
 
     private void Awake()
     {
