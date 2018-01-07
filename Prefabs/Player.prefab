@@ -52,4 +52,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGodMode: 0
-  score: 100000
+  score: 0

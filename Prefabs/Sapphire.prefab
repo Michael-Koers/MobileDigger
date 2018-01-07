@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 5
   gemName: Sapphire
-  animation:
+  anim:
     isSpinning: 1
     isScaling: 0
     rotateClockwise: 0

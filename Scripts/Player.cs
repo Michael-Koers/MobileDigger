@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     public bool isGodMode;
 
     public Pickaxe pickaxe = new Pickaxe(1, 0, "Wooden pickaxe");
+    public Inventory inventory = new Inventory(5, 0, "Teensy backpack");
+    public GemInterest interest = null;
+    public Elevator elevator = null;
 
     public float score;
 

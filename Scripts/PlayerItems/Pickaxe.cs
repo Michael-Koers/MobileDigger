@@ -1,11 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-public class Pickaxe
+public class Pickaxe : PlayerItem
 {
     public int damage;
-    public int cost;
-    public string name;
 
     public Pickaxe(int damage, int cost, string name)
     {

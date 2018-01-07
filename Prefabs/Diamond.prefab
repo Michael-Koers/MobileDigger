@@ -111,17 +111,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 50
   gemName: Diamond
-  animation:
+  anim:
     isSpinning: 0
     isScaling: 1
     rotateClockwise: 0
     rotationSpeed: 0
-    startScale: {x: 0.9, y: 0.9, z: 0.9}
-    endScale: {x: 0.6, y: 0.6, z: 0.6}
-    scalingUp: 1
-    scaleSpeed: 2
-    scaleRate: 1
-    scaleTimer: 0
+    startScale: {x: 1, y: 1, z: 0}
+    endScale: {x: 0.6, y: 0.6, z: 0}
+    scalingUp: 0
+    scaleSpeed: 1
+    scaleRate: 2
+    scaleTimer: 0.5436854
 --- !u!212 &212389971408138918
 SpriteRenderer:
   m_ObjectHideFlags: 1
