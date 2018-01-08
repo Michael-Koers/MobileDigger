@@ -2,12 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ShopController : MonoBehaviour
+public abstract class ShopController : PopUpController
 {
     public Vector2 position;
-
-    public static ShopController openedShop;
-
-    public abstract void closeShop();
-    public abstract void openShop();
 }
