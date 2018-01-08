@@ -28,11 +28,11 @@ public class MineController : ShopController
         message = gameObject.AddComponent<MineMessage>();
     }
 
-    public override void closeShop()
+    public override void closePopUpScreen()
     {
     }
 
-    public override void openShop()
+    public override void openPopUpScreen()
     {
         message.showMessage();
     }

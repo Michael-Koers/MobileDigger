@@ -1253,7 +1253,7 @@ GameObject:
   - component: {fileID: 363280848}
   - component: {fileID: 363280847}
   m_Layer: 5
-  m_Name: HomeCanvas
+  m_Name: ElevatorCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2146,7 +2146,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 739217393}
-          m_MethodName: openShop
+          m_MethodName: openPopUpScreen
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2170,7 +2170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e26a724dba6944b992d41c3ab3ec70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position: {x: 0, y: 0}
 --- !u!1 &745822180
 GameObject:
   m_ObjectHideFlags: 0
@@ -4019,7 +4018,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 150}
+  m_SizeDelta: {x: 100, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1276228860
 MonoBehaviour:
@@ -4040,7 +4039,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 4809314599823314d8c6894b05c1d9f8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a4455c0ae08bdcf47a1d10277c2f3b09, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

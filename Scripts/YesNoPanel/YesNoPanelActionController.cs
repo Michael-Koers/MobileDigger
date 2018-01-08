@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class YesNoPanelActionController : MonoBehaviour
 {
-
     public virtual void NoActionHandler()
     {
         LevelController.selected.Cancel();

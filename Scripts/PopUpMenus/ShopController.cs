@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class ShopController : PopUpController
 {
-    public Vector2 position;
+    public Vector2 shopPosition;
 }

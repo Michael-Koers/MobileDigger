@@ -10,12 +10,12 @@ public class YesNoPanelController : MonoBehaviour
     private void Start()
     {
         CanvasGroup canvas = GameObject.FindGameObjectWithTag("YesNoCanvas").GetComponent<CanvasGroup>();
-        canvas.alpha = 0f;
-        canvas.blocksRaycasts = false;
+        CanvasManager.HideCanvas(canvas);
     }
 
     public void SetMessage(string message)
     {
         textPanel.GetComponent<Text>().text = message;
     }
+
 }

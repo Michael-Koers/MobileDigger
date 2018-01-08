@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryController : ShopController
+public class InventoryController : PopUpController
 {
     private Animator inventoryAnimation;
     private static string inventoryAnimationBoolean = "inventoryOpen";
@@ -12,15 +12,14 @@ public class InventoryController : ShopController
         inventoryAnimation = GameObject.FindGameObjectWithTag("InventoryCanvas").GetComponent<Animator>(); ;
     }
 
-    public override void openShop()
+    public override void openPopUpScreen()
     {
         inventoryAnimation.SetBool(inventoryAnimationBoolean, true);
-        openedShop = this;
+        openedPopUp = this;
     }
 
-    public override void closeShop()
+    public override void closePopUpScreen()
     {
         inventoryAnimation.SetBool(inventoryAnimationBoolean, false);
-
     }
 }

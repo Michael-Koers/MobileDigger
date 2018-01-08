@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class CloseShopController : MonoBehaviour
 {
-
     public void onMouseClick()
     {
-        ShopController.openedShop.closeShop();
+        ShopController.openedPopUp.closePopUpScreen();
     }
 }

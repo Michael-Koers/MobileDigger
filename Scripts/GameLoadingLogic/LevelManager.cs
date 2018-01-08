@@ -283,13 +283,13 @@ public class LevelManager : MonoBehaviour
     {
         boardHolder = new GameObject("Surface");
 
-        GameObject blacksmithObject = Instantiate(shops.blacksmith, shops.blacksmith.GetComponent<ShopController>().position, Quaternion.identity);
+        GameObject blacksmithObject = Instantiate(shops.blacksmith, shops.blacksmith.GetComponent<ShopController>().shopPosition, Quaternion.identity);
         blacksmithObject.transform.SetParent(boardHolder.transform);
 
-        GameObject mineObject = Instantiate(shops.mine, shops.mine.GetComponent<ShopController>().position, Quaternion.identity);
+        GameObject mineObject = Instantiate(shops.mine, shops.mine.GetComponent<ShopController>().shopPosition, Quaternion.identity);
         mineObject.transform.SetParent(boardHolder.transform);
 
-        GameObject merchantObject = Instantiate(shops.merchant, shops.merchant.GetComponent<ShopController>().position, Quaternion.identity);
+        GameObject merchantObject = Instantiate(shops.merchant, shops.merchant.GetComponent<ShopController>().shopPosition, Quaternion.identity);
         merchantObject.transform.SetParent(boardHolder.transform);
 
         entrancePosition = new Vector2(0, 0);

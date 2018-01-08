@@ -75,7 +75,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114189591668386442}
-          m_MethodName: openShop
+          m_MethodName: openPopUpScreen
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ae208363674aa40a89481c9eeaac0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position: {x: 0.5, y: -0.5}
+  shopPosition: {x: 0, y: 0}
 --- !u!212 &212529611564109664
 SpriteRenderer:
   m_ObjectHideFlags: 1

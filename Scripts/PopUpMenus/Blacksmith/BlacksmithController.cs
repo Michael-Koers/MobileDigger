@@ -12,13 +12,13 @@ public class BlacksmithController : ShopController
         blacksmithAnimation = GameObject.FindGameObjectWithTag("BlacksmithCanvas").GetComponent<Animator>(); ;
     }
 
-    public override void openShop()
+    public override void openPopUpScreen()
     {
         blacksmithAnimation.SetBool(blacksmithAnimationBoolean, true);
-        openedShop = this;
+        openedPopUp = this;
     }
 
-    public override void closeShop()
+    public override void closePopUpScreen()
     {
         blacksmithAnimation.SetBool(blacksmithAnimationBoolean, false);
     }
