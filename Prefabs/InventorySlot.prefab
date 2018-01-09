@@ -74,8 +74,8 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 450
-  m_PreferredHeight: 450
+  m_PreferredWidth: 300
+  m_PreferredHeight: 300
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
@@ -172,7 +172,7 @@ RectTransform:
   m_GameObject: {fileID: 1473704013829502}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 224178464884650020}
   m_RootOrder: 0
