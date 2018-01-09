@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class Gem : MonoBehaviour
 {
     public int value;
+    private MessagePanelController okMessageController;
     [HideInInspector] public string gemName;
 
     [Serializable]
@@ -28,10 +29,24 @@ public abstract class Gem : MonoBehaviour
 
     public Animation anim;
 
+    private void Awake()
+    {
+        okMessageController = GameObject.FindGameObjectWithTag("MessageCanvas").GetComponent<MessagePanelController>();
+    }
+
     public virtual void PickUp()
     {
-        Player.AddPoints(value);
-        Destroy(this.gameObject);
+        if (Player.player.inventory.pickedUpItems.Count >= Player.player.inventory.inventorySpace)
+        {
+            okMessageController.SetMessage("Inventory is full. Sell or drop items to make space.");
+            okMessageController.ShowMessage();
+        }
+        else
+        {
+            Player.player.inventory.pickedUpItems.Add(this);
+            this.gameObject.SetActive(false);
+        }
+
     }
 
     public virtual void onMouseClick()
