@@ -9,6 +9,8 @@ public class InventoryController : PopUpController
     private static string inventoryAnimationBoolean = "inventoryOpen";
 
     public GameObject inventoryItems;
+    public GameObject totalValueItems;
+    public GameObject spacesLeft;
 
     public void Awake()
     {
@@ -30,6 +32,10 @@ public class InventoryController : PopUpController
     public void updateInventory()
     {
         Text inventoryText = inventoryItems.GetComponent<Text>();
+        Text totalValueText = totalValueItems.GetComponent<Text>();
+        Text spacesLeftText = spacesLeft.GetComponent<Text>();
+
+        spacesLeftText.text = "Inventory space: " + Player.player.inventory.pickedUpItems.Count + "/" + Player.player.inventory.inventorySpace;
 
         if (Player.player.inventory.pickedUpItems.Count == 0)
         {
@@ -38,13 +44,16 @@ public class InventoryController : PopUpController
         else
         {
             string gemList = "";
+            int totalValue = 0;
 
             foreach (Gem pickedUpGem in Player.player.inventory.pickedUpItems)
             {
-                gemList += "-" + pickedUpGem.gemName + "\n";
+                gemList += string.Format("-{0} ({1}G) \n", pickedUpGem.gemName, pickedUpGem.value);
+                totalValue += pickedUpGem.value;
             }
 
             inventoryText.text = gemList;
+            totalValueText.text = "Total value: " + totalValue;
         }
     }
 }
