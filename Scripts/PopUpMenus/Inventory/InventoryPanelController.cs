@@ -11,7 +11,8 @@ public class InventoryPanelController : MonoBehaviour
     public GameObject spacesLeft;
     public GameObject itemContainer;
 
-    private List<InventorySlotController> slots = new List<InventorySlotController>();
+    private List<GameObject> slots = new List<GameObject>();
+    private List<Gem> tempSlots;
 
     public void resetScrollView()
     {
@@ -23,8 +24,41 @@ public class InventoryPanelController : MonoBehaviour
         initiateInventory();
     }
 
+    public void upgradeInventory()
+    {
+        backUpInventory();
+        initiateInventory();
+        AddItemsToNewInventory();
+    }
+
+    private void backUpInventory()
+    {
+        tempSlots = new List<Gem>();
+
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (slots[i].GetComponent<InventorySlotController>().gem != null)
+            {
+                tempSlots.Add(slots[i].GetComponent<InventorySlotController>().gem);
+            }
+            Destroy(slots[i].gameObject);
+        }
+    }
+
+    private void AddItemsToNewInventory()
+    {
+        for (int i = 0; i < tempSlots.Count; i++)
+        {
+            slots[i].GetComponent<InventorySlotController>().setItem(tempSlots[i]);
+        }
+
+        tempSlots.Clear();
+    }
+
     public void initiateInventory()
     {
+        slots.Clear();
+
         float y = 0f;
 
         for (int i = 0; i < Player.player.inventory.inventorySpace; i++)
@@ -48,12 +82,17 @@ public class InventoryPanelController : MonoBehaviour
 
             GameObject slot = Instantiate(inventorySlot, itemContainer.transform);
             slot.transform.SetParent(itemContainer.transform);
-            slots.Add(slot.GetComponent<InventorySlotController>());
+            slots.Add(slot);
         }
     }
 
     public void updateInventory()
     {
+        if (Player.player.inventory.inventorySpace != slots.Count)
+        {
+            upgradeInventory();
+        }
+
         Text totalValueText = totalValueItems.GetComponent<Text>();
         Text spacesLeftText = spacesLeft.GetComponent<Text>();
 
@@ -63,7 +102,7 @@ public class InventoryPanelController : MonoBehaviour
 
         for (int i = 0; i < Player.player.inventory.pickedUpItems.Count; i++)
         {
-            slots[i].setItem(Player.player.inventory.pickedUpItems[i].getGemImage());
+            slots[i].GetComponent<InventorySlotController>().setItem(Player.player.inventory.pickedUpItems[i]);
             totalValue += Player.player.inventory.pickedUpItems[i].value;
         }
 

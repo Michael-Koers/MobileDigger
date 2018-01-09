@@ -6,10 +6,17 @@ using UnityEngine.UI;
 public class InventorySlotController : MonoBehaviour
 {
     public GameObject item;
+    [HideInInspector] public Gem gem = null;
 
-    public void setItem(Sprite image)
+    public void setItem(Gem gem)
     {
-        item.GetComponent<Image>().sprite = image;
+        this.gem = gem;
+        updateImage();
+    }
+
+    private void updateImage()
+    {
+        item.GetComponent<Image>().sprite = gem.getGemImage();
         Color color = GetComponent<Image>().color;
         color.a = 255;
         item.GetComponent<Image>().color = color;

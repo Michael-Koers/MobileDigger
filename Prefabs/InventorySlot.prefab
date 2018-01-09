@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 1473704013829502}
+  gem: {fileID: 0}
 --- !u!114 &114499912162967202
 MonoBehaviour:
   m_ObjectHideFlags: 1
