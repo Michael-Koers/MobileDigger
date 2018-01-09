@@ -54,6 +54,11 @@ public abstract class Gem : MonoBehaviour
         PickUp();
     }
 
+    public Sprite getGemImage()
+    {
+        return GetComponent<SpriteRenderer>().sprite;
+    }
+
     public virtual void Update()
     {
         if (anim.isSpinning)

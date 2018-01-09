@@ -69,22 +69,22 @@ MonoBehaviour:
     levelApperance:
       minimum: 1
       maximum: 15
-    spawnRate: 5
+    spawnRate: 10
   - gem: {fileID: 1730783559850254, guid: 61f3d1614869a034fb4d4c4a43ff96f2, type: 2}
     levelApperance:
-      minimum: 4
-      maximum: 20
-    spawnRate: 30
+      minimum: 2
+      maximum: 25
+    spawnRate: 10
   - gem: {fileID: 1805634076348782, guid: 641977794d4890e46b8182671732b438, type: 2}
     levelApperance:
-      minimum: 10
+      minimum: 3
       maximum: 30
-    spawnRate: 40
+    spawnRate: 10
   - gem: {fileID: 1481623103042330, guid: d2fba5ede5858f640a7a84f140989864, type: 2}
     levelApperance:
-      minimum: 15
+      minimum: 4
       maximum: 30
-    spawnRate: 50
+    spawnRate: 10
   baseSquare: 4
   levelGrowth: 5
   square: 0
