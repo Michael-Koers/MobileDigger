@@ -16,5 +16,6 @@ public class InventoryUpgradesController : UpgradesController
     public override void givePlayerItem()
     {
         Player.player.inventory = (Inventory)items[upgradeCount];
+        GameObject.FindGameObjectWithTag("InventoryCanvas").GetComponent<InventoryPanelController>().upgradeInventory();
     }
 }

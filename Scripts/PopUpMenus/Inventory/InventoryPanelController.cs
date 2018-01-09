@@ -26,43 +26,23 @@ public class InventoryPanelController : MonoBehaviour
 
     public void upgradeInventory()
     {
-        backUpInventory();
         initiateInventory();
-        AddItemsToNewInventory();
-    }
-
-    private void backUpInventory()
-    {
-        tempSlots = new List<Gem>();
-
-        for (int i = 0; i < slots.Count; i++)
-        {
-            if (slots[i].GetComponent<InventorySlotController>().gem != null)
-            {
-                tempSlots.Add(slots[i].GetComponent<InventorySlotController>().gem);
-            }
-            Destroy(slots[i].gameObject);
-        }
-    }
-
-    private void AddItemsToNewInventory()
-    {
-        for (int i = 0; i < tempSlots.Count; i++)
-        {
-            slots[i].GetComponent<InventorySlotController>().setItem(tempSlots[i]);
-        }
-
-        tempSlots.Clear();
+        updateInventory();
     }
 
     public void initiateInventory()
     {
-        slots.Clear();
-
         float y = 0f;
 
         for (int i = 0; i < Player.player.inventory.inventorySpace; i++)
         {
+            if (slots.ElementAtOrDefault(i) != null)
+            {
+                if (i % 2 == 1)
+                    y -= 500;
+                continue;
+            }
+
             inventorySlot.transform.position = new Vector2(0, y);
 
             if (i % 2 == 1)
@@ -88,11 +68,6 @@ public class InventoryPanelController : MonoBehaviour
 
     public void updateInventory()
     {
-        if (Player.player.inventory.inventorySpace != slots.Count)
-        {
-            upgradeInventory();
-        }
-
         Text totalValueText = totalValueItems.GetComponent<Text>();
         Text spacesLeftText = spacesLeft.GetComponent<Text>();
 

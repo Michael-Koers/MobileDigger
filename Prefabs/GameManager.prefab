@@ -69,7 +69,7 @@ MonoBehaviour:
     levelApperance:
       minimum: 1
       maximum: 15
-    spawnRate: 10
+    spawnRate: 1
   - gem: {fileID: 1730783559850254, guid: 61f3d1614869a034fb4d4c4a43ff96f2, type: 2}
     levelApperance:
       minimum: 2
