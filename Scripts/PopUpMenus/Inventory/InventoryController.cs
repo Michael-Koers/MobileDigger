@@ -21,12 +21,12 @@ public class InventoryController : PopUpController
         inventoryAnimation.SetBool(inventoryAnimationBoolean, true);
         openedPopUp = this;
         inventoryPanelController.updateInventory();
+        inventoryPanelController.resetScrollView();
     }
 
     public override void closePopUpScreen()
     {
         inventoryAnimation.SetBool(inventoryAnimationBoolean, false);
-        inventoryPanelController.resetScrollView();
     }
 
 

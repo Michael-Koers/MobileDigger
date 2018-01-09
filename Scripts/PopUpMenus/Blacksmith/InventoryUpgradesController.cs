@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InventoryUpgradesController : UpgradesController
 {
+    private List<Gem> temp = new List<Gem>();
+
     public override void setStoreItems()
     {
         items.Add(new Inventory(10, 50, "Small backpack"));
@@ -15,7 +17,25 @@ public class InventoryUpgradesController : UpgradesController
 
     public override void givePlayerItem()
     {
+        //Copy loot to temp List
+        foreach (Gem gem in Player.player.inventory.pickedUpItems)
+        {
+            temp.Add(gem);
+        }
+
+        //Replace the inventory object with new upgraded one
         Player.player.inventory = (Inventory)items[upgradeCount];
+
+        //Place the items in the new inventory object
+        foreach (Gem gem in temp)
+        {
+            Player.player.inventory.pickedUpItems.Add(gem);
+        }
+
+        //Clear the temp list
+        temp.Clear();
+
+        //Upgrade the inventory UI
         GameObject.FindGameObjectWithTag("InventoryCanvas").GetComponent<InventoryPanelController>().upgradeInventory();
     }
 }

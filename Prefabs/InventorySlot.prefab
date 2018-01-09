@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 222204971533089506}
   - component: {fileID: 114726508140150112}
   - component: {fileID: 114099716032229780}
+  - component: {fileID: 114358728666642960}
   m_Layer: 0
   m_Name: InventorySlot
   m_TagString: Untagged
@@ -59,6 +60,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 1473704013829502}
   gem: {fileID: 0}
+--- !u!114 &114358728666642960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1980638772228118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 450
+  m_PreferredHeight: 450
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!114 &114499912162967202
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,17 +153,17 @@ RectTransform:
   m_GameObject: {fileID: 1980638772228118}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.5, y: 4.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224373311046434936}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -4500}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -1000}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0, y: 1}
 --- !u!224 &224373311046434936
 RectTransform:
   m_ObjectHideFlags: 1
@@ -152,7 +172,7 @@ RectTransform:
   m_GameObject: {fileID: 1473704013829502}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 224178464884650020}
   m_RootOrder: 0

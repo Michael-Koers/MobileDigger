@@ -12,7 +12,6 @@ public class InventoryPanelController : MonoBehaviour
     public GameObject itemContainer;
 
     private List<GameObject> slots = new List<GameObject>();
-    private List<Gem> tempSlots;
 
     public void resetScrollView()
     {
@@ -32,32 +31,11 @@ public class InventoryPanelController : MonoBehaviour
 
     public void initiateInventory()
     {
-        float y = 0f;
-
         for (int i = 0; i < Player.player.inventory.inventorySpace; i++)
         {
             if (slots.ElementAtOrDefault(i) != null)
             {
-                if (i % 2 == 1)
-                    y -= 500;
                 continue;
-            }
-
-            inventorySlot.transform.position = new Vector2(0, y);
-
-            if (i % 2 == 1)
-            {
-                inventorySlot.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
-                inventorySlot.GetComponent<RectTransform>().anchorMin = new Vector2(1, 1);
-                inventorySlot.GetComponent<RectTransform>().pivot = new Vector2(1, 1);
-
-                y -= 500;
-            }
-            else
-            {
-                inventorySlot.GetComponent<RectTransform>().anchorMax = new Vector2(0, 1);
-                inventorySlot.GetComponent<RectTransform>().anchorMin = new Vector2(0, 1);
-                inventorySlot.GetComponent<RectTransform>().pivot = new Vector2(0, 1);
             }
 
             GameObject slot = Instantiate(inventorySlot, itemContainer.transform);
