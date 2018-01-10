@@ -8,6 +8,7 @@ public class MultiActionsController : MultiActionDelegate
     public GameObject actionButton;
     public GameObject actionContainer;
     public Text messageText;
+    public GameObject cancelButton;
 
     public void Awake()
     {
@@ -28,6 +29,7 @@ public class MultiActionsController : MultiActionDelegate
             actionButton.GetComponent<MultiActionButtonController>().setActionName(entry.Key);
             actionButton.transform.SetParent(actionContainer.transform);
         }
+        cancelButton.transform.SetAsLastSibling();
     }
 
 }

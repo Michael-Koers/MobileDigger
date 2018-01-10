@@ -8,7 +8,7 @@ public class MultiActionButtonController : MultiActionDelegate
     public ActionButtonDelegate myAction;
     public Text myActionName;
 
-    public void setActionReference(MultiActionDelegate.ActionButtonDelegate action)
+    public void setActionReference(ActionButtonDelegate action)
     {
         myAction = action;
     }
