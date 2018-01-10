@@ -22,4 +22,9 @@ public class MultiActionButtonController : MultiActionDelegate
     {
         myAction();
     }
+
+    public void Cancel()
+    {
+        CanvasManager.HideCanvas(GameObject.FindGameObjectWithTag("MultiActionCanvas").GetComponent<CanvasGroup>());
+    }
 }
