@@ -9,7 +9,7 @@ public class YesNoPanelController : MonoBehaviour
 
     private void Start()
     {
-        CanvasGroup canvas = GetComponentInParent<CanvasGroup>();
+        CanvasGroup canvas = GameObject.FindGameObjectWithTag("YesNoCanvas").GetComponent<CanvasGroup>();
         CanvasManager.HideCanvas(canvas);
     }
 
