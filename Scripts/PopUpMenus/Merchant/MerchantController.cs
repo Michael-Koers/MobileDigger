@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class MerchantController : ShopController
 {
-    public override void closePopUpScreen()
+    private Animator merchantAnimation;
+    private static string merchantAnimationBoolean = "merchantOpen";
+
+    public void Awake()
     {
-        throw new System.NotImplementedException();
+        merchantAnimation = GameObject.FindGameObjectWithTag("MerchantCanvas").GetComponent<Animator>();
     }
 
     public override void openPopUpScreen()
     {
-        Debug.Log("clicked merchant");
+        merchantAnimation.SetBool(merchantAnimationBoolean, true);
+        openedPopUp = this;
+    }
+
+    public override void closePopUpScreen()
+    {
+        merchantAnimation.SetBool(merchantAnimationBoolean, false);
     }
 }
