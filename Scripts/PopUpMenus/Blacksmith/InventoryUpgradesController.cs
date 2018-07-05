@@ -43,6 +43,6 @@ public class InventoryUpgradesController : UpgradesController
         temp.Clear();
 
         //Upgrade the inventory UI
-        GameObject.FindGameObjectWithTag("InventoryCanvas").GetComponent<InventoryPanelController>().upgradeInventory();
+        //GameObject.FindGameObjectWithTag("InventoryCanvas").GetComponent<InventoryPanelController>().updateInventory();
     }
 }

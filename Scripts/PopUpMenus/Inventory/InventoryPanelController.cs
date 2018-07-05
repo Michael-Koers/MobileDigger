@@ -26,8 +26,6 @@ public class InventoryPanelController : MonoBehaviour
 
     public void Start()
     {
-        initiateInventory();
-
         multiActionButton = GameObject.FindGameObjectWithTag("MultiActionCanvas").GetComponent<MultiActionsController>();
         multiActionCanvas = GameObject.FindGameObjectWithTag("MultiActionCanvas").GetComponent<CanvasGroup>();
 
@@ -42,24 +40,13 @@ public class InventoryPanelController : MonoBehaviour
         multiActionButton.createActionButtons(actions);
     }
 
-    public void upgradeInventory()
-    {
-        initiateInventory();
-        updateInventory();
-    }
-
-    public void initiateInventory()
-    {
-        //for (int i = 0; i < Player.player.inventory.pickedUpItems.Count; i++)
-        //{
-        //    GameObject slot = Instantiate(inventorySlot, itemContainer.transform);
-        //    slot.transform.SetParent(itemContainer.transform);
-        //    slots.Add(slot);
-        //}
-    }
-
     public void updateInventory()
     {
+        foreach (GameObject slot in slots)
+        {
+            Destroy(slot);
+        }
+
         Text baseValueText = baseValueItems.GetComponent<Text>();
         Text spacesLeftText = spacesLeft.GetComponent<Text>();
 
@@ -67,10 +54,12 @@ public class InventoryPanelController : MonoBehaviour
 
         spacesLeftText.text = "Inventory space: " + Player.player.inventory.getFreeInventorySpace() + "/" + Player.player.inventory.inventorySpace;
 
-        int index = 0;
-        foreach(KeyValuePair<Gem.GemNames, List<Gem>> entry in Player.player.inventory.pickedUpItems)
+        foreach (KeyValuePair<Gem.GemNames, List<Gem>> entry in Player.player.inventory.pickedUpItems)
         {
-            slots[index].GetComponent<InventorySlotController>().setItem(entry.Value);
+            GameObject slot = Instantiate(inventorySlot, itemContainer.transform);
+            slot.transform.SetParent(itemContainer.transform);
+            slots.Add(slot);
+            slot.GetComponent<InventorySlotController>().setItem(entry.Value);
             baseValue += Player.player.inventory.getGemTypeTotalValue(entry.Key);
         }
 

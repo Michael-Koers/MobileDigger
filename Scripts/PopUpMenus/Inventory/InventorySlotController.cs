@@ -39,7 +39,7 @@ public class InventorySlotController : MonoBehaviour
 
     private void updateImage()
     {
-        if (this.gems != null)
+        if (this.gems.Count == 0)
         {
             item.GetComponent<Image>().sprite = gems[0].getGemImage();
             Color color = GetComponent<Image>().color;
