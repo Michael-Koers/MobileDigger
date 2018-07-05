@@ -6,6 +6,6 @@ public class DiamondController : Gem
 {
     private void Start()
     {
-        this.gemName = "Diamond";
+        this.gemName = GemNames.Diamond;
     }
 }

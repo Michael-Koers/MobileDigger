@@ -7,6 +7,6 @@ public class RubyController : Gem
 
     private void Start()
     {
-        this.gemName = "Ruby";
+        this.gemName = GemNames.Ruby;
     }
 }

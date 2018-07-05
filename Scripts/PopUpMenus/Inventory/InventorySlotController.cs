@@ -12,36 +12,36 @@ public class InventorySlotController : MonoBehaviour
     private Sprite noneSprite;
     private int slotNumber;
 
-    [HideInInspector] public Gem gem = null;
+    [HideInInspector] public List<Gem> gems = null;
 
     public void Awake()
     {
         noneSprite = item.GetComponent<Image>().sprite;
     }
 
-    public void setItem(Gem gem)
+    public void setItem(List<Gem> gem)
     {
-        this.gem = gem;
+        this.gems = gem;
         updateSlot();
     }
 
     public void removeItem()
     {
-        this.gem = null;
+        this.gems = null;
         updateSlot();
     }
 
     public void updateSlot()
     {
         updateImage();
-        updatePrice();
+        updateAmount();
     }
 
     private void updateImage()
     {
-        if (this.gem != null)
+        if (this.gems != null)
         {
-            item.GetComponent<Image>().sprite = gem.getGemImage();
+            item.GetComponent<Image>().sprite = gems[0].getGemImage();
             Color color = GetComponent<Image>().color;
             color.a = 255;
             item.GetComponent<Image>().color = color;
@@ -56,12 +56,12 @@ public class InventorySlotController : MonoBehaviour
 
     }
 
-    private void updatePrice()
+    private void updateAmount()
     {
-        if (this.gem != null)
+        if (this.gems != null)
         {
             CanvasManager.ShowCanvas(itemPrice.GetComponent<CanvasGroup>());
-            itemPrice.GetComponentInChildren<Text>().text = "" + this.gem.value;
+            itemPrice.GetComponentInChildren<Text>().text = "" + this.gems.Count;
         }
         else
         {
@@ -74,7 +74,7 @@ public class InventorySlotController : MonoBehaviour
     public void onMouseClick()
     {
         selected = this;
-        GetComponentInParent<InventoryPanelController>().openActionMenu(this.gem);
+        GetComponentInParent<InventoryPanelController>().openActionMenu(this.gems);
     }
 
 }

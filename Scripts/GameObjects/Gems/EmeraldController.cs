@@ -7,6 +7,6 @@ public class EmeraldController : Gem
 
     private void Start()
     {
-        this.gemName = "Emerald";
+        this.gemName = GemNames.Emerald;
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class InventoryPanelController : MonoBehaviour
 {
     public GameObject inventorySlot;
-    public GameObject totalValueItems;
+    public GameObject baseValueItems;
     public GameObject spacesLeft;
     public GameObject itemContainer;
 
@@ -50,13 +50,8 @@ public class InventoryPanelController : MonoBehaviour
 
     public void initiateInventory()
     {
-        for (int i = 0; i < Player.player.inventory.inventorySpace; i++)
+        for (int i = 0; i < Player.player.inventory.pickedUpItems.Count; i++)
         {
-            if (slots.ElementAtOrDefault(i) != null)
-            {
-                continue;
-            }
-
             GameObject slot = Instantiate(inventorySlot, itemContainer.transform);
             slot.transform.SetParent(itemContainer.transform);
             slots.Add(slot);
@@ -65,43 +60,38 @@ public class InventoryPanelController : MonoBehaviour
 
     public void updateInventory()
     {
-        Text totalValueText = totalValueItems.GetComponent<Text>();
+        Text baseValueText = baseValueItems.GetComponent<Text>();
         Text spacesLeftText = spacesLeft.GetComponent<Text>();
 
-        int totalValue = 0;
+        int baseValue = 0;
 
-        spacesLeftText.text = "Inventory space: " + Player.player.inventory.pickedUpItems.Count + "/" + Player.player.inventory.inventorySpace;
+        spacesLeftText.text = "Inventory space: " + Player.player.inventory.getFreeInventorySpace() + "/" + Player.player.inventory.inventorySpace;
 
-        for (int i = 0; i < Player.player.inventory.inventorySpace; i++)
+        int index = 0;
+        foreach(KeyValuePair<Gem.GemNames, List<Gem>> entry in Player.player.inventory.pickedUpItems)
         {
-            if (Player.player.inventory.pickedUpItems.ElementAtOrDefault(i) != null)
-            {
-                slots[i].GetComponent<InventorySlotController>().setItem(Player.player.inventory.pickedUpItems[i]);
-                totalValue += Player.player.inventory.pickedUpItems[i].value;
-            }
-            else
-            {
-                slots[i].GetComponent<InventorySlotController>().removeItem();
-            }
+            slots[index].GetComponent<InventorySlotController>().setItem(entry.Value);
+            baseValue += Player.player.inventory.getGemTypeTotalValue(entry.Key);
         }
 
-        totalValueText.text = "Total value: " + totalValue;
+        baseValueText.text = "Base value: " + baseValue;
 
     }
 
-    public void openActionMenu(Gem gem)
+    public void openActionMenu(List<Gem> gem)
     {
         if (gem != null)
         {
-            gemToBeRemoved = gem;
-            multiActionButton.setMessage("Do what with this " + gem.gemName + "?");
+            gemToBeRemoved = gem[0];
+            multiActionButton.setMessage("What to do with your " + gem[0].gemName + "(s)?");
             CanvasManager.ShowCanvas(multiActionCanvas);
         }
     }
 
     public void onDropOne()
     {
-        Player.player.inventory.pickedUpItems.Remove(gemToBeRemoved);
+        Player.player.inventory.removeGem(gemToBeRemoved);
+        //Player.player.inventory.pickedUpItems[gemToBeRemoved.gemName].Remove(gemToBeRemoved);
         Destroy(gemToBeRemoved.gameObject);
         CanvasManager.HideCanvas(multiActionCanvas);
         InventorySlotController.selected.removeItem();
@@ -110,31 +100,15 @@ public class InventoryPanelController : MonoBehaviour
 
     public void onDropAll()
     {
-        for (int i = Player.player.inventory.pickedUpItems.Count; i > -1; i--)
-        {
-            if (Player.player.inventory.pickedUpItems.ElementAtOrDefault(i) != null &&
-                string.Equals(Player.player.inventory.pickedUpItems[i].gemName, gemToBeRemoved.gemName))
-            {
-                Player.player.inventory.pickedUpItems.RemoveAt(i);
-                Destroy(slots[i].GetComponent<InventorySlotController>().gem.gameObject);
-                slots[i].GetComponent<InventorySlotController>().removeItem();
-            }
-        }
+        Player.player.inventory.removeTypeGem(gemToBeRemoved.gemName);
         CanvasManager.HideCanvas(multiActionCanvas);
         updateInventory();
     }
 
     public void onDropInventory()
     {
-        for (int i = Player.player.inventory.pickedUpItems.Count; i > -1; i--)
-        {
-            if (Player.player.inventory.pickedUpItems.ElementAtOrDefault(i) != null)
-            {
-                Player.player.inventory.pickedUpItems.RemoveAt(i);
-                Destroy(slots[i].GetComponent<InventorySlotController>().gem.gameObject);
-                slots[i].GetComponent<InventorySlotController>().removeItem();
-            }
-        }
+        Player.player.inventory.clearInventory();
+
         CanvasManager.HideCanvas(multiActionCanvas);
         updateInventory();
     }

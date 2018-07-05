@@ -7,7 +7,8 @@ public abstract class Gem : MonoBehaviour
 {
     public int value;
     private MessagePanelController okMessageController;
-    [HideInInspector] public string gemName;
+    [HideInInspector] public enum GemNames { Sapphire, Emerald, Ruby, Diamond }
+    [HideInInspector] public GemNames gemName;
 
     [Serializable]
     public class Animation
@@ -36,14 +37,14 @@ public abstract class Gem : MonoBehaviour
 
     public virtual void PickUp()
     {
-        if (Player.player.inventory.pickedUpItems.Count >= Player.player.inventory.inventorySpace)
+        if (Player.player.inventory.isInventoryFull())
         {
-            okMessageController.SetMessage("Inventory is full. Sell or drop items to make space.");
+            okMessageController.SetMessage("Inventory is full! Sell or drop items to make space!");
             okMessageController.ShowMessage();
         }
         else
         {
-            Player.player.inventory.pickedUpItems.Add(this);
+            Player.player.inventory.pickedUpItems[this.gemName].Add(this);
             this.gameObject.SetActive(false);
         }
 

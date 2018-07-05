@@ -51,5 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e394362de9cc37b45ab785e8b81ebf3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGodMode: 1
+  isGodMode: 0
   score: 1000000
