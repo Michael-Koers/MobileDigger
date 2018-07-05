@@ -44,7 +44,7 @@ public abstract class Gem : MonoBehaviour
         }
         else
         {
-            Player.player.inventory.pickedUpItems[this.gemName].Add(this);
+            Player.player.inventory.addItem(this);
             this.gameObject.SetActive(false);
         }
 

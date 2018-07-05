@@ -5,14 +5,13 @@ using System.Linq;
 public class Inventory : PlayerItem
 {
     public int inventorySpace;
-    public Dictionary<Gem.GemNames, List<Gem>> pickedUpItems;
+    public Dictionary<Gem.GemNames, List<Gem>> pickedUpItems = new Dictionary<Gem.GemNames, List<Gem>>();
 
     public Inventory(int space, int cost, string name)
     {
         this.inventorySpace = space;
         this.cost = cost;
         this.name = name;
-
     }
 
     public bool isInventoryFull()
@@ -32,7 +31,15 @@ public class Inventory : PlayerItem
 
     public void addItem(Gem gem)
     {
-        pickedUpItems[gem.gemName].Add(gem);
+        if (pickedUpItems.ContainsKey(gem.gemName))
+        {
+            pickedUpItems[gem.gemName].Add(gem);
+        }
+        else
+        {
+            pickedUpItems.Add(gem.gemName, new List<Gem> { gem });
+        }
+
     }
 
     public void removeGem(Gem gem)
@@ -63,16 +70,10 @@ public class Inventory : PlayerItem
     private int getInventoryCount()
     {
         int count = 0;
-
-        foreach(List<Gem> gems in pickedUpItems)
-        {
-
-        }
-        foreach (KeyValuePair<Gem.GemNames, List<Gem>> entry in pickedUpItems ?? Enumerable.Empty<Dictionary>())
+        foreach (var entry in pickedUpItems)
         {
             count += entry.Value.Count;
         }
-
         return count;
     }
 }

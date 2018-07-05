@@ -3782,7 +3782,7 @@ GameObject:
   - component: {fileID: 930398809}
   - component: {fileID: 930398808}
   m_Layer: 5
-  m_Name: TotalValue
+  m_Name: BaseValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5730,7 +5730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventorySlot: {fileID: 1980638772228118, guid: 8c961532600ea3d4cb07a6ae6956f964,
     type: 2}
-  totalValueItems: {fileID: 930398806}
+  baseValueItems: {fileID: 930398806}
   spacesLeft: {fileID: 675367626}
   itemContainer: {fileID: 374848168}
 --- !u!1 &1380440826

@@ -50,12 +50,12 @@ public class InventoryPanelController : MonoBehaviour
 
     public void initiateInventory()
     {
-        for (int i = 0; i < Player.player.inventory.pickedUpItems.Count; i++)
-        {
-            GameObject slot = Instantiate(inventorySlot, itemContainer.transform);
-            slot.transform.SetParent(itemContainer.transform);
-            slots.Add(slot);
-        }
+        //for (int i = 0; i < Player.player.inventory.pickedUpItems.Count; i++)
+        //{
+        //    GameObject slot = Instantiate(inventorySlot, itemContainer.transform);
+        //    slot.transform.SetParent(itemContainer.transform);
+        //    slots.Add(slot);
+        //}
     }
 
     public void updateInventory()
